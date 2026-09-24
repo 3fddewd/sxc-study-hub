@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SXC Mumbai - Student PYQ, Syllabus & Study Portal</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config for SXC Theme -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        sxc: {
+                            navy: '#0F2C59',
+                            navyLight: '#183b73',
+                            navyDark: '#081a38',
+                            gold: '#E5A93C',
+                            goldHover: '#c88f28',
+                            goldLight: '#fef3c7',
+                            bgLight: '#f8fafc',
+                            cardBg: '#ffffff',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            transition: background-color 0.3s ease;
+        }
+        .dark body {
+            background-color: #0b1329;
+            color: #f1f5f9;
+        }
+        .sxc-gradient {
+            background: linear-gradient(135deg, #081a38 0%, #0F2C59 60%, #1e427b 100%);
+        }
+        .gold-border {
+            border-bottom: 3px solid #E5A93C;
+        }
+        .gold-glow {
+            box-shadow: 0 0 15px rgba(229, 169, 60, 0.35);
+        }
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(15, 44, 89, 0.18);
+        }
+        
+        /* Category Badges */
+        .badge-pyq { background-color: #fee2e2; color: #991b1b; border: 1px solid #f87171; }
+        .badge-syllabus { background-color: #e0e7ff; color: #3730a3; border: 1px solid #818cf8; }
+        .badge-notes { background-color: #dcfce7; color: #166534; border: 1px solid #4ade80; }
+        .badge-premium { background-color: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+
+        .dark .badge-pyq { background-color: #450a0a; color: #fca5a5; border-color: #7f1d1d; }
+        .dark .badge-syllabus { background-color: #1e1b4b; color: #a5b4fc; border-color: #3730a3; }
+        .dark .badge-notes { background-color: #052e16; color: #86efac; border-color: #14532d; }
+        .dark .badge-premium { background-color: #451a03; color: #fde047; border-color: #78350f; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        .dark ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-sxc-gold selection:text-sxc-navy">
+
+    <div>
+        <!-- Main Top Header -->
+        <header class="sxc-gradient text-white shadow-xl sticky top-0 z-30 gold-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between py-3.5 gap-4">
+                    
+                    <!-- Identity Badge -->
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center p-1 shadow-md border-2 border-sxc-gold flex-shrink-0">
+                            <i class="fa-solid fa-graduation-cap text-sxc-navy text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h1 class="text-xl font-black tracking-tight text-white leading-none">ST. XAVIER'S COLLEGE</h1>
+                                <span class="bg-sxc-gold text-sxc-navy text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm">AUTONOMOUS</span>
+                            </div>
+                            <p class="text-xs text-amber-200/90 font-medium tracking-wide mt-0.5">MUMBAI &bull; Student PYQ, Syllabus & Solved Answers Bank</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions Header -->
+                    <div class="flex items-center space-x-2 sm:space-x-3">
+                        <!-- Dark Mode Toggle -->
+                        <button onclick="toggleDarkMode()" class="p-2.5 bg-white/10 hover:bg-white/20 text-amber-200 rounded-xl transition text-sm flex items-center justify-center cursor-pointer border border-white/10" title="Toggle Light/Dark Theme">
+                            <i id="themeIcon" class="fa-solid fa-moon text-sxc-gold"></i>
+                        </button>
+
+                        <button onclick="switchTab('upload')" class="px-4 py-2 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-extrabold rounded-xl transition shadow-md flex items-center space-x-2 text-sm cursor-pointer">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <span>Upload Notes / PYQ</span>
+                        </button>
+                        
+                        <button onclick="switchTab('premium')" class="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-amber-300 rounded-xl text-sm transition flex items-center gap-1.5 cursor-pointer border border-amber-400/30">
+                            <i class="fa-solid fa-crown text-sxc-gold"></i>
+                            <span class="font-bold hidden sm:inline">Premium Solved</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs Bar -->
+                <nav class="flex space-x-2 border-t border-white/10 pt-2 pb-1 overflow-x-auto text-xs sm:text-sm font-bold">
+                    <button id="tabBtnBrowse" onclick="switchTab('browse')" class="px-4 py-2 rounded-t-xl bg-white text-sxc-navy flex items-center gap-2 cursor-pointer transition shadow-sm">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Browse Materials</span>
+                        <span id="navCountBadge" class="bg-sxc-navy/10 text-sxc-navy font-black text-[10px] px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                    
+                    <button id="tabBtnPremium" onclick="switchTab('premium')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition">
+                        <i class="fa-solid fa-gem text-sxc-gold"></i>
+                        <span>Premium Question Bank</span>
+                        <span class="bg-sxc-gold text-sxc-navy font-black text-[10px] px-1.5 py-0.2 rounded-full uppercase">Top Grades</span>
+                    </button>
+
+                    <button id="tabBtnUpload" onclick="switchTab('upload')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <span>Upload Material</span>
+                    </button>
+
+                    <button id="tabBtnPayInfo" onclick="switchTab('payinfo')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition ml-auto">
+                        <i class="fa-solid fa-qrcode text-sxc-gold"></i>
+                        <span>Bank & UPI Details</span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+            <!-- TAB 1: BROWSE MATERIALS & DYNAMIC FILTERS -->
+            <section id="viewBrowse" class="tab-view space-y-6">
+                <!-- Search & Filter Controls Card -->
+                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-4 sm:p-6 transition-colors">
+                    <div class="relative mb-4">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search by Subject, Course Code, Topic (e.g. ITS101, Financial Accounting, Microeconomics)..." class="w-full pl-10 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-sxc-navy text-slate-800 dark:text-slate-100 text-sm font-medium transition outline-none">
+                        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Department / Stream</label>
+                            <select id="departmentFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none">
+                                <option value="ALL">All Departments</option>
+                                <option value="BSc IT">BSc Information Technology</option>
+                                <option value="BSc CS">BSc Computer Science</option>
+                                <option value="BMS">BMS (Management Studies)</option>
+                                <option value="BAMMC">BAMMC (Mass Media)</option>
+                                <option value="BA Economics">BA Economics</option>
+                                <option value="BCom">BCom (Accounting & Finance)</option>
+                                <option value="BSc General">BSc Physics / Chem / Bio</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Semester</label>
+                            <select id="semesterFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none">
+                                <option value="ALL">All Semesters</option>
+                                <option value="Sem 1">Semester 1</option>
+                                <option value="Sem 2">Semester 2</option>
+                                <option value="Sem 3">Semester 3</option>
+                                <option value="Sem 4">Semester 4</option>
+                                <option value="Sem 5">Semester 5</option>
+                                <option value="Sem 6">Semester 6</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Resource Category</label>
+                            <select id="typeFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none">
+                                <option value="ALL">All Resource Types</option>
+                                <option value="PYQ">Question Papers (PYQs)</option>
+                                <option value="Syllabus">Official SXC Syllabus</option>
+                                <option value="Notes">Lecture Notes / Handouts</option>
+                                <option value="Solved Paper">Solved Question Papers</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feed Header -->
+                <div class="flex justify-between items-center pb-2 border-b border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center space-x-2">
+                        <h2 class="text-lg font-bold text-sxc-navy dark:text-amber-300">Available Study Materials</h2>
+                        <span id="resourceCountBadge" class="bg-sxc-navy/10 dark:bg-amber-400/20 text-sxc-navy dark:text-amber-300 font-extrabold text-xs px-2.5 py-1 rounded-full">0 Items</span>
+                    </div>
+                    <button onclick="resetFilters()" class="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-sxc-navy dark:hover:text-white flex items-center gap-1 cursor-pointer">
+                        <i class="fa-solid fa-rotate-right"></i> Reset Filters
+                    </button>
+                </div>
+
+                <!-- Empty State Container -->
+                <div id="emptyState" class="hidden text-center py-12 bg-white dark:bg-slate-900 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
+                    <i class="fa-solid fa-folder-open text-5xl text-slate-300 dark:text-slate-700 mb-3"></i>
+                    <h3 class="font-bold text-slate-700 dark:text-slate-200 text-lg">No matching materials found</h3>
+                    <p class="text-slate-400 dark:text-slate-500 text-sm mb-4">Be the first student to upload notes for this subject!</p>
+                    <button onclick="switchTab('upload')" class="px-5 py-2.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-bold rounded-xl text-sm transition shadow-md">
+                        <i class="fa-solid fa-plus-circle mr-1"></i> Upload Material Now
+                    </button>
+                </div>
+
+                <!-- Grid of Resources -->
+                <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </section>
+
+            <!-- TAB 2: INDEPENDENT STUDENT UPLOAD -->
+            <section id="viewUpload" class="tab-view hidden max-w-2xl mx-auto">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <div class="sxc-gradient p-6 text-white gold-border">
+                        <h2 class="text-xl font-black flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-arrow-up text-sxc-gold"></i>
+                            Contribute Study Material
+                        </h2>
+                        <p class="text-xs text-amber-200/90 mt-1">Upload PYQs, syllabus copies, or handwritten notes to support fellow Xavierites.</p>
+                    </div>
+
+                    <form id="uploadForm" onsubmit="handleUploadSubmit(event)" class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Document Title *</label>
+                            <input type="text" id="upTitle" required placeholder="e.g. EndSem 2023 - Python & Data Structures PYQ" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Department *</label>
+                                <select id="upDept" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                                    <option value="">Select Department</option>
+                                    <option value="BSc IT">BSc Information Technology</option>
+                                    <option value="BSc CS">BSc Computer Science</option>
+                                    <option value="BMS">BMS (Management Studies)</option>
+                                    <option value="BAMMC">BAMMC (Mass Media)</option>
+                                    <option value="BA Economics">BA Economics</option>
+                                    <option value="BCom">BCom (Accounting & Finance)</option>
+                                    <option value="BSc General">BSc Physics / Chem / Bio</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Semester *</label>
+                                <select id="upSem" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                                    <option value="">Select Semester</option>
+                                    <option value="Sem 1">Semester 1</option>
+                                    <option value="Sem 2">Semester 2</option>
+                                    <option value="Sem 3">Semester 3</option>
+                                    <option value="Sem 4">Semester 4</option>
+                                    <option value="Sem 5">Semester 5</option>
+                                    <option value="Sem 6">Semester 6</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Subject Name *</label>
+                                <input type="text" id="upSubject" required placeholder="e.g. Database Management Systems" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Resource Category *</label>
+                                <select id="upType" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                                    <option value="PYQ">Question Paper (PYQ)</option>
+                                    <option value="Notes">Study Notes / Handouts</option>
+                                    <option value="Syllabus">Official Syllabus Copy</option>
+                                    <option value="Solved Paper">Solved Question Paper</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Google Drive or Shareable PDF URL *</label>
+                            <input type="url" id="upUrl" required placeholder="https://drive.google.com/file/d/..." class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                            <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-1">Upload your file to Google Drive, set sharing to "Anyone with the link", and paste the link here.</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Your Name / Contributor ID (Optional)</label>
+                            <input type="text" id="upContributor" placeholder="e.g. Rohan V. (SYBSc IT)" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-3 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                                <i class="fa-solid fa-paper-plane text-sxc-gold"></i>
+                                <span>Publish Material to Portal</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- TAB 3: PREMIUM QUESTION BANK & SOLVED PAPERS -->
+            <section id="viewPremium" class="tab-view hidden space-y-6">
+                <!-- Banner -->
+                <div class="sxc-gradient rounded-2xl p-6 sm:p-8 text-white gold-border relative overflow-hidden shadow-xl">
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="bg-sxc-gold text-sxc-navy text-xs font-black px-2.5 py-1 rounded-md uppercase tracking-wider mb-2 inline-block">SXC Top Grade Series</span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-white">Verified Solved Papers & Topper Revision Packs</h2>
+                        <p class="text-sm text-amber-100/90 mt-2">Get access to step-by-step end-semester solutions, verified answer keys by SXC alumni, and exam revision cheat sheets.</p>
+                    </div>
+                </div>
+
+                <!-- Premium Item Cards Grid -->
+                <div id="premiumGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            </section>
+
+            <!-- TAB 4: BANK & UPI DETAILS INFO PAGE -->
+            <section id="viewPayInfo" class="tab-view hidden max-w-3xl mx-auto space-y-6">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <div class="sxc-gradient p-6 text-white gold-border">
+                        <h2 class="text-xl font-black flex items-center gap-2">
+                            <i class="fa-solid fa-building-columns text-sxc-gold"></i>
+                            Official Payment & Bank Account Details
+                        </h2>
+                        <p class="text-xs text-amber-200/90 mt-1">Use these verified payment methods to unlock premium solved question paper bundles.</p>
+                    </div>
+
+                    <div class="p-6 space-y-6">
+                        <!-- Direct UPI Box -->
+                        <div class="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 p-5 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div class="space-y-1">
+                                <span class="bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200 font-black text-[10px] px-2 py-0.5 rounded uppercase">Primary UPI ID</span>
+                                <h3 id="displayUpiId" class="text-xl font-extrabold text-sxc-navy dark:text-amber-300 font-mono">8928689931@pthdfc</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400">Accepts Google Pay, PhonePe, Paytm, BHIM UPI & Banking Apps</p>
+                            </div>
+                            <button onclick="copyText('8928689931@pthdfc', 'UPI ID Copied!')" class="px-4 py-2 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-bold rounded-xl shadow text-xs flex items-center gap-1.5 cursor-pointer">
+                                <i class="fa-regular fa-copy"></i> Copy UPI ID
+                            </button>
+                        </div>
+
+                        <!-- Bank Transfer Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+                                <p class="text-xs text-slate-400 uppercase font-bold">Bank Account Number</p>
+                                <p class="text-lg font-black text-slate-800 dark:text-slate-100 font-mono mt-1">XX8018</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+                                <p class="text-xs text-slate-400 uppercase font-bold">IFSC Code</p>
+                                <p class="text-lg font-black text-slate-800 dark:text-slate-100 font-mono mt-1">SBIN0001850</p>
+                            </div>
+                        </div>
+
+                        <!-- QR Code Generator Preview -->
+                        <div class="text-center p-6 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                            <p class="text-xs font-bold text-slate-500 uppercase">Universal Payment QR Code</p>
+                            <img id="generalQrImg" src="" alt="UPI Payment QR Code" class="w-48 h-48 mx-auto object-contain border-4 border-white dark:border-slate-700 rounded-xl shadow-md">
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Scan using any UPI App on your phone to send payment instantly</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL: Integrated Dynamic UPI Payment Modal -->
+    <div id="payModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-md overflow-hidden transform transition-all">
+            <!-- Modal Header -->
+            <div class="sxc-gradient p-4 text-white flex justify-between items-center gold-border">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-lock text-sxc-gold text-lg"></i>
+                    <h3 class="font-extrabold text-base">Unlock Premium Material</h3>
+                </div>
+                <button onclick="closePayModal()" class="text-slate-300 hover:text-white font-bold p-1 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-5 space-y-4">
+                <!-- Item Summary -->
+                <div class="bg-amber-50 dark:bg-amber-950/40 p-3.5 rounded-xl border border-amber-200 dark:border-amber-800/60">
+                    <p class="text-[11px] text-amber-800 dark:text-amber-300 font-bold uppercase tracking-wider">Selected Solved Bundle</p>
+                    <h4 id="payItemTitle" class="font-extrabold text-sxc-navy dark:text-slate-100 text-sm mt-0.5">SXC Solved Bundle</h4>
+                    <div class="flex justify-between items-center mt-2 pt-2 border-t border-amber-200/60 dark:border-amber-800/60">
+                        <span class="text-xs font-semibold text-slate-600 dark:text-slate-400">Total Price:</span>
+                        <span id="payItemPrice" class="text-xl font-black text-sxc-navy dark:text-sxc-gold">₹49</span>
+                    </div>
+                </div>
+
+                <!-- Payment Options Tabs -->
+                <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300">
+                    <button id="payTabUpi" onclick="setPayMethod('upi')" class="flex-1 py-2 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-sxc-navy dark:text-sxc-gold transition">
+                        <i class="fa-solid fa-qrcode mr-1"></i> Scan UPI QR
+                    </button>
+                    <button id="payTabBank" onclick="setPayMethod('bank')" class="flex-1 py-2 rounded-lg transition hover:text-sxc-navy dark:hover:text-white">
+                        <i class="fa-solid fa-building-columns mr-1"></i> Bank Account
+                    </button>
+                </div>
+
+                <!-- UPI View -->
+                <div id="payViewUpi" class="space-y-3 text-center">
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Scan using GPay, PhonePe, Paytm or BHIM UPI</p>
+                    
+                    <!-- Dynamic QR Code Container -->
+                    <div class="bg-white p-3 border border-slate-200 dark:border-slate-700 rounded-xl inline-block shadow-sm">
+                        <img id="modalUpiQrImg" src="" alt="UPI Payment QR Code" class="w-44 h-44 mx-auto object-contain">
+                    </div>
+
+                    <!-- Direct Mobile Deeplink Button -->
+                    <div id="mobileUpiBtnContainer" class="pt-1">
+                        <a id="mobileUpiDeepLink" href="#" class="w-full py-2.5 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl shadow transition text-xs flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-mobile-screen-button text-sxc-gold"></i> Open UPI App on Phone
+                        </a>
+                    </div>
+
+                    <div class="bg-slate-50 dark:bg-slate-800 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 flex justify-between items-center text-xs">
+                        <span class="text-slate-500 dark:text-slate-400 font-semibold">UPI ID: <strong class="text-slate-800 dark:text-slate-200 font-mono">8928689931@pthdfc</strong></span>
+                        <button onclick="copyText('8928689931@pthdfc', 'UPI ID copied!')" class="text-sxc-navy dark:text-sxc-gold font-bold hover:underline cursor-pointer">
+                            <i class="fa-regular fa-copy"></i> Copy
+                        </button>
+                    </div>
+
+                    <!-- UTR Reference Verification Form -->
+                    <form onsubmit="verifyUpiTxn(event)" class="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                        <label class="block text-left text-xs font-bold text-slate-700 dark:text-slate-300">Enter 12-Digit UTR / Transaction Reference ID *</label>
+                        <input type="text" id="upiTxnInput" required placeholder="e.g. 409283741092" pattern="[0-9A-Za-z]{8,18}" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm text-center font-mono text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                        <button type="submit" class="w-full py-2.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-bold rounded-lg shadow transition text-sm flex items-center justify-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-circle-check"></i> Submit Reference & Unlock
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Bank View -->
+                <div id="payViewBank" class="hidden space-y-3">
+                    <div class="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Account Number:</span>
+                            <span class="font-bold text-slate-800 dark:text-slate-200 font-mono">XX8018</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">IFSC Code:</span>
+                            <span class="font-bold text-slate-800 dark:text-slate-200 font-mono">SBIN0001850</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Bank Branch:</span>
+                            <span class="font-medium text-slate-700 dark:text-slate-300">State Bank of India</span>
+                        </div>
+                    </div>
+
+                    <form onsubmit="verifyUpiTxn(event)" class="space-y-2">
+                        <label class="block text-left text-xs font-bold text-slate-700 dark:text-slate-300">Enter Transaction Reference / UTR Number *</label>
+                        <input type="text" id="bankTxnInput" required placeholder="e.g. 409283741092" pattern="[0-9A-Za-z]{8,18}" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm text-center font-mono text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                        <button type="submit" class="w-full py-2.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-bold rounded-lg shadow transition text-sm flex items-center justify-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-circle-check"></i> Submit Reference & Unlock
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Document Previewer Modal -->
+    <div id="previewModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-3xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="sxc-gradient px-6 py-4 text-white flex justify-between items-center gold-border">
+                <div>
+                    <span id="prevBadge" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-sxc-gold text-sxc-navy">PYQ</span>
+                    <h3 id="prevTitle" class="font-bold text-base sm:text-lg mt-0.5 line-clamp-1">Document Preview</h3>
+                </div>
+                <button onclick="closePreviewModal()" class="text-slate-300 hover:text-white font-bold p-1 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1 bg-slate-50 dark:bg-slate-950">
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-center shadow-sm">
+                    <i class="fa-regular fa-file-pdf text-5xl text-sxc-navy dark:text-sxc-gold mb-3"></i>
+                    <h4 id="prevSubject" class="font-extrabold text-slate-800 dark:text-slate-100 text-lg mb-1">Subject Title</h4>
+                    <p id="prevMeta" class="text-xs text-slate-500 dark:text-slate-400 mb-4">BSc IT &bull; Sem 3</p>
+
+                    <!-- Google Drive Embed Frame -->
+                    <div id="iframeWrapper" class="w-full h-80 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 mb-4 hidden">
+                        <iframe id="previewIframe" src="" class="w-full h-full border-0"></iframe>
+                    </div>
+
+                    <a id="prevDownloadLink" href="#" target="_blank" download class="w-full py-3 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-extrabold rounded-xl shadow transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-arrow-down-to-line"></i> Open PDF / Google Drive Document
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-sxc-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3 border-l-4 border-sxc-gold">
+        <i class="fa-solid fa-circle-check text-sxc-gold text-lg"></i>
+        <span id="toastMsg" class="text-sm font-semibold">Notification message</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-sxc-navy dark:bg-slate-950 text-slate-300 py-6 border-t-2 border-sxc-gold mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+            <div class="flex items-center space-x-3">
+                <div class="w-7 h-7 rounded-lg bg-sxc-gold text-sxc-navy flex items-center justify-center font-black text-xs">SXC</div>
+                <p class="font-medium text-white">St. Xavier's College (Autonomous), Mumbai &bull; Student Study Portal</p>
+            </div>
+            <p class="text-slate-400">&copy; Built for Xavierites &bull; Single-File Web App (Local Storage Edition)</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        
+        // Static Config
+        const UPI_ID = "8928689931@pthdfc";
+        const BANK_ACC = "XX8018";
+        const BANK_IFSC = "SBIN0001850";
+
+        // Sample Pre-populated Resources
+        const defaultResources = [
+            {
+                id: "res-101",
+                title: "EndSem 2023 - Data Structures & Algorithms PYQ",
+                department: "BSc IT",
+                semester: "Sem 3",
+                subject: "Data Structures & Algorithms",
+                type: "PYQ",
+                contributor: "Dept Academic Council",
+                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                date: "2023-11-15"
+            },
+            {
+                id: "res-102",
+                title: "Autonomous Syllabus Copy (2023-2026)",
+                department: "BSc IT",
+                semester: "Sem 1",
+                subject: "Imperative Programming",
+                type: "Syllabus",
+                contributor: "SXC Council",
+                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                date: "2023-08-10"
+            },
+            {
+                id: "res-103",
+                title: "Macroeconomics Unit 1-4 Complete Lecture Notes",
+                department: "BA Economics",
+                semester: "Sem 2",
+                subject: "Macroeconomics",
+                type: "Notes",
+                contributor: "Ananya R. (SYBA)",
+                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                date: "2024-02-01"
+            },
+            {
+                id: "res-104",
+                title: "Financial Management MidSem 2023 Question Paper",
+                department: "BMS",
+                semester: "Sem 4",
+                subject: "Financial Management",
+                type: "PYQ",
+                contributor: "BMS Student Club",
+                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                date: "2023-10-05"
+            }
+        ];
+
+        // Sample Premium Solved Bundles
+        const premiumBundles = [
+            {
+                id: "prem-201",
+                title: "BSc IT End-Sem Solved PYQ Bundle (2020-2023)",
+                department: "BSc IT",
+                semester: "Sem 3",
+                subject: "Data Structures & Database Systems",
+                price: 49,
+                description: "Fully solved end-semester papers with step-by-step algorithms, database schemas, and model answers verified by top rankers.",
+                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+            },
+            {
+                id: "prem-202",
+                title: "BMS Topper Exam Revision Cheat Sheet",
+                department: "BMS",
+                semester: "Sem 4",
+                subject: "Financial Accounting & Valuation",
+                price: 39,
+                description: "Formula sheets, key accounting principles, and 50 solved numerical problems for rapid end-sem revision.",
+                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+            },
+            {
+                id: "prem-203",
+                title: "BCom A+ Grade Complete Revision Pack",
+                department: "BCom",
+                semester: "Sem 2",
+                subject: "Auditing & Cost Accounting",
+                price: 59,
+                description: "Includes last 5 years' solved question papers and high-yield topic predictions for SXC exams.",
+                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+            }
+        ];
+
+        // Global State
+        let resources = [];
+        let unlockedItems = new Set();
+        let activePayItem = null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            generateGeneralQr();
+            renderResources();
+            renderPremiumGrid();
+        });
+
+        // Theme Toggle
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            document.getElementById('themeIcon').className = isDark ? "fa-solid fa-sun text-sxc-gold" : "fa-solid fa-moon text-sxc-gold";
+            localStorage.setItem('sxc_theme', isDark ? 'dark' : 'light');
+        }
+
+        if (localStorage.getItem('sxc_theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+
+        // LocalStorage Operations
+        function loadState() {
+            const savedRes = localStorage.getItem('sxc_resources_v2');
+            if (savedRes) {
+                try { resources = JSON.parse(savedRes); } catch(e) { resources = [...defaultResources]; }
+            } else {
+                resources = [...defaultResources];
+                saveState();
+            }
+
+            const savedUnlocked = localStorage.getItem('sxc_unlocked_v2');
+            if (savedUnlocked) {
+                try { unlockedItems = new Set(JSON.parse(savedUnlocked)); } catch(e) {}
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem('sxc_resources_v2', JSON.stringify(resources));
+            localStorage.setItem('sxc_unlocked_v2', JSON.stringify(Array.from(unlockedItems)));
+        }
+
+        // Generate General QR Code
+        function generateGeneralQr() {
+            const upiUri = `upi://pay?pa=${UPI_ID}&pn=SXC%20Mumbai%20Study%20Portal&mc=0000&mode=02&purpose=00`;
+            const qrUrl = `https://quickchart.io/qr?text=${encodeURIComponent(upiUri)}&size=220&margin=1`;
+            document.getElementById('generalQrImg').src = qrUrl;
+        }
+
+        // Switch Navigation Tabs
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
+            
+            const btnMap = { browse: 'tabBtnBrowse', upload: 'tabBtnUpload', premium: 'tabBtnPremium', payinfo: 'tabBtnPayInfo' };
+            Object.keys(btnMap).forEach(key => {
+                const btn = document.getElementById(btnMap[key]);
+                if (key === tabName) {
+                    btn.className = "px-4 py-2 rounded-t-xl bg-white dark:bg-slate-900 text-sxc-navy dark:text-amber-300 font-extrabold flex items-center gap-2 cursor-pointer shadow-sm";
+                } else {
+                    btn.className = "px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition font-bold";
+                }
+            });
+
+            if (tabName === 'browse') document.getElementById('viewBrowse').classList.remove('hidden');
+            if (tabName === 'upload') document.getElementById('viewUpload').classList.remove('hidden');
+            if (tabName === 'premium') document.getElementById('viewPremium').classList.remove('hidden');
+            if (tabName === 'payinfo') document.getElementById('viewPayInfo').classList.remove('hidden');
+        }
+
+        // Render Browse Resources
+        function renderResources() {
+            const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
+            const deptVal = document.getElementById('departmentFilter').value;
+            const semVal = document.getElementById('semesterFilter').value;
+            const typeVal = document.getElementById('typeFilter').value;
+
+            document.getElementById('clearSearchBtn').classList.toggle('hidden', searchVal.length === 0);
+
+            const filtered = resources.filter(res => {
+                const matchSearch = searchVal === '' || 
+                    res.title.toLowerCase().includes(searchVal) ||
+                    res.subject.toLowerCase().includes(searchVal) ||
+                    res.department.toLowerCase().includes(searchVal);
+                
+                const matchDept = deptVal === 'ALL' || res.department === deptVal;
+                const matchSem = semVal === 'ALL' || res.semester === semVal;
+                const matchType = typeVal === 'ALL' || res.type === typeVal;
+
+                return matchSearch && matchDept && matchSem && matchType;
+            });
+
+            document.getElementById('resourceCountBadge').innerText = `${filtered.length} Items`;
+            document.getElementById('navCountBadge').innerText = filtered.length;
+            
+            const grid = document.getElementById('resourceGrid');
+            const empty = document.getElementById('emptyState');
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            grid.innerHTML = filtered.map(item => `
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm card-hover flex flex-col justify-between overflow-hidden">
+                    <div class="p-5">
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full ${getBadgeStyle(item.type)}">
+                                ${item.type}
+                            </span>
+                            <span class="text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 rounded-md">
+                                ${item.semester}
+                            </span>
+                        </div>
+
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug mb-1 line-clamp-2 hover:text-sxc-navy dark:hover:text-amber-300 cursor-pointer transition" onclick="openPreviewModal('${item.id}')">
+                            ${escapeHtml(item.title)}
+                        </h3>
+                        
+                        <p class="text-xs font-semibold text-sxc-navy dark:text-amber-300/90 mb-3 flex items-center gap-1">
+                            <i class="fa-solid fa-book-bookmark text-sxc-gold"></i>
+                            <span>${escapeHtml(item.subject)}</span>
+                        </p>
+
+                        <div class="text-xs text-slate-500 dark:text-slate-400 space-y-1 bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400 dark:text-slate-500">Dept:</span>
+                                <span class="font-medium text-slate-700 dark:text-slate-300">${escapeHtml(item.department)}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400 dark:text-slate-500">Contributed by:</span>
+                                <span class="font-medium text-slate-700 dark:text-slate-300 truncate max-w-[130px]">${escapeHtml(item.contributor || 'Student')}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-5 py-3 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                        <button onclick="openPreviewModal('${item.id}')" class="text-xs font-extrabold text-sxc-navy dark:text-amber-300 hover:underline flex items-center gap-1 cursor-pointer">
+                            <i class="fa-regular fa-eye"></i> Quick View
+                        </button>
+                        <a href="${item.fileUrl}" target="_blank" download class="px-3 py-1.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy text-xs font-extrabold rounded-lg shadow-sm transition flex items-center gap-1">
+                            <i class="fa-solid fa-download"></i> Get File
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Premium Bank Grid
+        function renderPremiumGrid() {
+            const grid = document.getElementById('premiumGrid');
+            grid.innerHTML = premiumBundles.map(bundle => {
+                const isUnlocked = unlockedItems.has(bundle.id);
+                return `
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl border ${isUnlocked ? 'border-green-400 dark:border-green-600' : 'border-amber-200 dark:border-amber-800/60'} shadow-md card-hover flex flex-col justify-between overflow-hidden relative">
+                        <div class="p-5">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded ${isUnlocked ? 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'}">
+                                    ${isUnlocked ? 'Unlocked Pack' : 'Premium Pack'}
+                                </span>
+                                <span class="text-lg font-black text-sxc-navy dark:text-sxc-gold">₹${bundle.price}</span>
+                            </div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base mb-1">${escapeHtml(bundle.title)}</h3>
+                            <p class="text-xs font-bold text-sxc-navy dark:text-amber-300 mb-2">${bundle.department} &bull; ${bundle.semester}</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">${escapeHtml(bundle.description)}</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+                            ${isUnlocked ? `
+                                <a href="${bundle.fileUrl}" target="_blank" download class="w-full py-2.5 bg-green-600 hover:bg-green-700 text-white font-extrabold rounded-xl shadow transition text-xs flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-file-arrow-down"></i> Download Solved Bundle
+                                </a>
+                            ` : `
+                                <button onclick="openPayModal('${bundle.id}')" class="w-full py-2.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-extrabold rounded-xl shadow transition text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+                                    <i class="fa-solid fa-lock"></i> Unlock Solved Set (₹${bundle.price})
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Student Independent Upload Form Submission
+        function handleUploadSubmit(e) {
+            e.preventDefault();
+            const newRes = {
+                id: 'res-' + Date.now(),
+                title: document.getElementById('upTitle').value.trim(),
+                department: document.getElementById('upDept').value,
+                semester: document.getElementById('upSem').value,
+                subject: document.getElementById('upSubject').value.trim(),
+                type: document.getElementById('upType').value,
+                fileUrl: document.getElementById('upUrl').value.trim(),
+                contributor: document.getElementById('upContributor').value.trim() || 'Student',
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            resources.unshift(newRes);
+            saveState();
+            document.getElementById('uploadForm').reset();
+            showToast('Material published successfully to portal!');
+            switchTab('browse');
+            renderResources();
+        }
+
+        // Payment Modal Controls
+        function openPayModal(bundleId) {
+            const bundle = premiumBundles.find(b => b.id === bundleId);
+            if (!bundle) return;
+
+            activePayItem = bundle;
+            document.getElementById('payItemTitle').innerText = bundle.title;
+            document.getElementById('payItemPrice').innerText = `₹${bundle.price}`;
+
+            // Build standard UPI intent string
+            const upiString = `upi://pay?pa=${UPI_ID}&pn=SXC%20Mumbai%20Study%20Portal&am=${bundle.price}&cu=INR&tn=SXC%20Material%20${bundle.id}`;
+            const qrUrl = `https://quickchart.io/qr?text=${encodeURIComponent(upiString)}&size=200&margin=1`;
+            
+            document.getElementById('modalUpiQrImg').src = qrUrl;
+            document.getElementById('mobileUpiDeepLink').href = upiString;
+
+            document.getElementById('payModal').classList.remove('hidden');
+        }
+
+        function closePayModal() {
+            document.getElementById('payModal').classList.add('hidden');
+            activePayItem = null;
+        }
+
+        function setPayMethod(method) {
+            if (method === 'upi') {
+                document.getElementById('payViewUpi').classList.remove('hidden');
+                document.getElementById('payViewBank').classList.add('hidden');
+                document.getElementById('payTabUpi').className = "flex-1 py-2 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-sxc-navy dark:text-sxc-gold font-bold";
+                document.getElementById('payTabBank').className = "flex-1 py-2 rounded-lg hover:text-sxc-navy dark:hover:text-white font-bold";
+            } else {
+                document.getElementById('payViewUpi').classList.add('hidden');
+                document.getElementById('payViewBank').classList.remove('hidden');
+                document.getElementById('payTabBank').className = "flex-1 py-2 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-sxc-navy dark:text-sxc-gold font-bold";
+                document.getElementById('payTabUpi').className = "flex-1 py-2 rounded-lg hover:text-sxc-navy dark:hover:text-white font-bold";
+            }
+        }
+
+        function verifyUpiTxn(e) {
+            e.preventDefault();
+            const txnInput = document.getElementById('upiTxnInput').value.trim() || document.getElementById('bankTxnInput').value.trim();
+            if (txnInput.length < 8) {
+                showToast("Please enter a valid 12-digit UTR reference ID.");
+                return;
+            }
+
+            if (activePayItem) {
+                unlockedItems.add(activePayItem.id);
+                saveState();
+                closePayModal();
+                renderPremiumGrid();
+                showToast("Payment verified! Solved material unlocked.");
+            }
+        }
+
+        // Previewer Controls
+        function openPreviewModal(id) {
+            const item = resources.find(r => r.id === id);
+            if (!item) return;
+
+            document.getElementById('prevTitle').innerText = item.title;
+            document.getElementById('prevSubject').innerText = item.subject;
+            document.getElementById('prevMeta').innerText = `${item.department} • ${item.semester}`;
+            document.getElementById('prevBadge').innerText = item.type;
+            document.getElementById('prevDownloadLink').href = item.fileUrl;
+
+            const wrapper = document.getElementById('iframeWrapper');
+            const iframe = document.getElementById('previewIframe');
+            
+            if (item.fileUrl.includes('drive.google.com')) {
+                const embedUrl = item.fileUrl.replace('/view', '/preview');
+                iframe.src = embedUrl;
+                wrapper.classList.remove('hidden');
+            } else {
+                wrapper.classList.add('hidden');
+            }
+
+            document.getElementById('previewModal').classList.remove('hidden');
+        }
+
+        function closePreviewModal() {
+            document.getElementById('previewModal').classList.add('hidden');
+        }
+
+        // Helper Utilities
+        function applyFilters() { renderResources(); }
+        function clearSearch() { document.getElementById('searchInput').value = ''; renderResources(); }
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('departmentFilter').value = 'ALL';
+            document.getElementById('semesterFilter').value = 'ALL';
+            document.getElementById('typeFilter').value = 'ALL';
+            renderResources();
+        }
+
+        function getBadgeStyle(type) {
+            switch(type) {
+                case 'PYQ': return 'badge-pyq';
+                case 'Syllabus': return 'badge-syllabus';
+                case 'Notes': return 'badge-notes';
+                default: return 'badge-premium';
+            }
+        }
+
+        function copyText(text, msg) {
+            navigator.clipboard.writeText(text);
+            showToast(msg);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3200);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+    </script>
+</body>
+</html>
