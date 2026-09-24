@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SXC Mumbai - Student PYQ, Syllabus & Study Portal</title>
+    <title>St. Xavier's College Mumbai - Verified Study Portal</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,8 +28,6 @@
                             gold: '#E5A93C',
                             goldHover: '#c88f28',
                             goldLight: '#fef3c7',
-                            bgLight: '#f8fafc',
-                            cardBg: '#ffffff',
                         }
                     },
                     fontFamily: {
@@ -40,7 +38,6 @@
         }
     </script>
     
-    <!-- Custom CSS Styles -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -58,9 +55,6 @@
         .gold-border {
             border-bottom: 3px solid #E5A93C;
         }
-        .gold-glow {
-            box-shadow: 0 0 15px rgba(229, 169, 60, 0.35);
-        }
         .card-hover {
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -68,31 +62,16 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 24px -8px rgba(15, 44, 89, 0.18);
         }
-        
-        /* Category Badges */
-        .badge-pyq { background-color: #fee2e2; color: #991b1b; border: 1px solid #f87171; }
-        .badge-syllabus { background-color: #e0e7ff; color: #3730a3; border: 1px solid #818cf8; }
-        .badge-notes { background-color: #dcfce7; color: #166534; border: 1px solid #4ade80; }
-        .badge-premium { background-color: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
-
-        .dark .badge-pyq { background-color: #450a0a; color: #fca5a5; border-color: #7f1d1d; }
-        .dark .badge-syllabus { background-color: #1e1b4b; color: #a5b4fc; border-color: #3730a3; }
-        .dark .badge-notes { background-color: #052e16; color: #86efac; border-color: #14532d; }
-        .dark .badge-premium { background-color: #451a03; color: #fde047; border-color: #78350f; }
-
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         .dark ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .dark ::-webkit-scrollbar-thumb { background: #334155; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-sxc-gold selection:text-sxc-navy">
+<body class="min-h-screen flex flex-col justify-between antialiased">
 
     <div>
-        <!-- Main Top Header -->
         <header class="sxc-gradient text-white shadow-xl sticky top-0 z-30 gold-border">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between py-3.5 gap-4">
@@ -105,53 +84,63 @@
                         <div>
                             <div class="flex items-center gap-2">
                                 <h1 class="text-xl font-black tracking-tight text-white leading-none">ST. XAVIER'S COLLEGE</h1>
-                                <span class="bg-sxc-gold text-sxc-navy text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm">AUTONOMOUS</span>
+                                <span class="bg-sxc-gold text-sxc-navy text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider">MUMBAI</span>
                             </div>
-                            <p class="text-xs text-amber-200/90 font-medium tracking-wide mt-0.5">MUMBAI &bull; Student PYQ, Syllabus & Solved Answers Bank</p>
+                            <p class="text-xs text-amber-200/90 font-medium tracking-wide mt-0.5">Verified PYQs, KTs, Syllabus & Student Study Hub</p>
                         </div>
                     </div>
 
-                    <!-- Quick Actions Header -->
-                    <div class="flex items-center space-x-2 sm:space-x-3">
-                        <!-- Dark Mode Toggle -->
-                        <button onclick="toggleDarkMode()" class="p-2.5 bg-white/10 hover:bg-white/20 text-amber-200 rounded-xl transition text-sm flex items-center justify-center cursor-pointer border border-white/10" title="Toggle Light/Dark Theme">
-                            <i id="themeIcon" class="fa-solid fa-moon text-sxc-gold"></i>
-                        </button>
-
-                        <button onclick="switchTab('upload')" class="px-4 py-2 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-extrabold rounded-xl transition shadow-md flex items-center space-x-2 text-sm cursor-pointer">
-                            <i class="fa-solid fa-cloud-arrow-up"></i>
-                            <span>Upload Notes / PYQ</span>
-                        </button>
+                    <!-- Auth Options (Google Classroom & WhatsApp Login) & Dark Mode -->
+                    <div class="flex items-center space-x-2.5 flex-wrap gap-y-2">
                         
-                        <button onclick="switchTab('premium')" class="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-amber-300 rounded-xl text-sm transition flex items-center gap-1.5 cursor-pointer border border-amber-400/30">
-                            <i class="fa-solid fa-crown text-sxc-gold"></i>
-                            <span class="font-bold hidden sm:inline">Premium Solved</span>
+                        <!-- Logged Out Auth Buttons -->
+                        <div id="authButtonsContainer" class="flex items-center space-x-2">
+                            <button onclick="loginWithGoogleClassroom()" class="px-3 py-2 bg-white hover:bg-slate-100 text-slate-800 font-bold rounded-xl transition shadow text-xs flex items-center space-x-1.5 cursor-pointer">
+                                <i class="fa-brands fa-google text-red-500 text-sm"></i>
+                                <span>Google Classroom</span>
+                            </button>
+                            <button onclick="loginWithWhatsApp()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition shadow text-xs flex items-center space-x-1.5 cursor-pointer">
+                                <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>WhatsApp Login</span>
+                            </button>
+                        </div>
+
+                        <!-- Logged In User Profile Badge -->
+                        <div id="userProfileBadge" class="hidden items-center space-x-2 bg-white/10 px-3 py-1.5 rounded-xl border border-white/20 text-xs">
+                            <img id="userAvatar" src="" alt="" class="w-6 h-6 rounded-full border border-sxc-gold">
+                            <span id="userName" class="font-bold text-amber-200"></span>
+                            <button onclick="logoutUser()" class="text-slate-300 hover:text-white ml-2 text-[10px] uppercase font-bold underline cursor-pointer">Logout</button>
+                        </div>
+
+                        <!-- Dark Mode Toggle -->
+                        <button onclick="toggleDarkMode()" class="p-2.5 bg-white/10 hover:bg-white/20 text-amber-200 rounded-xl transition text-sm flex items-center justify-center cursor-pointer border border-white/10" title="Toggle Theme">
+                            <i id="themeIcon" class="fa-solid fa-moon text-sxc-gold"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Navigation Tabs Bar -->
-                <nav class="flex space-x-2 border-t border-white/10 pt-2 pb-1 overflow-x-auto text-xs sm:text-sm font-bold">
-                    <button id="tabBtnBrowse" onclick="switchTab('browse')" class="px-4 py-2 rounded-t-xl bg-white text-sxc-navy flex items-center gap-2 cursor-pointer transition shadow-sm">
+                <nav class="flex space-x-2 border-t border-white/10 pt-2 pb-1 overflow-x-auto text-xs sm:text-sm font-bold no-scrollbar">
+                    <button id="tabBtnBrowse" onclick="switchTab('browse')" class="px-4 py-2 rounded-t-xl bg-white dark:bg-slate-900 text-sxc-navy dark:text-amber-300 flex items-center gap-2 cursor-pointer transition shadow-sm whitespace-nowrap">
                         <i class="fa-solid fa-layer-group"></i>
-                        <span>Browse Materials</span>
-                        <span id="navCountBadge" class="bg-sxc-navy/10 text-sxc-navy font-black text-[10px] px-2 py-0.5 rounded-full">0</span>
+                        <span>Browse Verified Materials</span>
+                        <span id="navCountBadge" class="bg-sxc-navy/10 text-sxc-navy dark:text-amber-300 font-black text-[10px] px-2 py-0.5 rounded-full">0</span>
                     </button>
                     
-                    <button id="tabBtnPremium" onclick="switchTab('premium')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition">
-                        <i class="fa-solid fa-gem text-sxc-gold"></i>
-                        <span>Premium Question Bank</span>
-                        <span class="bg-sxc-gold text-sxc-navy font-black text-[10px] px-1.5 py-0.2 rounded-full uppercase">Top Grades</span>
+                    <button id="tabBtnUpload" onclick="switchTab('upload')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition whitespace-nowrap">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Student Upload (Anti-Spam)</span>
                     </button>
 
-                    <button id="tabBtnUpload" onclick="switchTab('upload')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition">
-                        <i class="fa-solid fa-plus-circle"></i>
-                        <span>Upload Material</span>
+                    <button id="tabBtnSuggestions" onclick="switchTab('suggestions')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition whitespace-nowrap">
+                        <i class="fa-solid fa-lightbulb text-sxc-gold"></i>
+                        <span>Ideas & Portal Rating</span>
                     </button>
-
-                    <button id="tabBtnPayInfo" onclick="switchTab('payinfo')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition ml-auto">
-                        <i class="fa-solid fa-qrcode text-sxc-gold"></i>
-                        <span>Bank & UPI Details</span>
+                    
+                    <button id="tabBtnAdmin" onclick="switchTab('admin')" class="px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition whitespace-nowrap">
+                        <i class="fa-solid fa-user-shield text-sxc-gold"></i>
+                        <span>Admin Portal</span>
+                        <span id="pendingCountBadge" class="bg-red-500 text-white font-black text-[10px] px-1.5 py-0.2 rounded-full hidden">0</span>
                     </button>
                 </nav>
             </div>
@@ -159,24 +148,21 @@
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-            <!-- TAB 1: BROWSE MATERIALS & DYNAMIC FILTERS -->
+            <!-- TAB 1: BROWSE VERIFIED MATERIALS -->
             <section id="viewBrowse" class="tab-view space-y-6">
-                <!-- Search & Filter Controls Card -->
+                <!-- Search & Filters -->
                 <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-4 sm:p-6 transition-colors">
                     <div class="relative mb-4">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search by Subject, Course Code, Topic (e.g. ITS101, Financial Accounting, Microeconomics)..." class="w-full pl-10 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-sxc-navy text-slate-800 dark:text-slate-100 text-sm font-medium transition outline-none">
-                        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-                            <i class="fa-solid fa-circle-xmark"></i>
-                        </button>
+                        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Search by Subject, Course Code, Topic (e.g. ITS101, Data Structures, KT Papers)..." class="w-full pl-10 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-sxc-navy text-slate-800 dark:text-slate-100 text-sm font-medium transition outline-none">
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Department / Stream</label>
-                            <select id="departmentFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none">
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Department</label>
+                            <select id="departmentFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none cursor-pointer">
                                 <option value="ALL">All Departments</option>
                                 <option value="BSc IT">BSc Information Technology</option>
                                 <option value="BSc CS">BSc Computer Science</option>
@@ -184,12 +170,11 @@
                                 <option value="BAMMC">BAMMC (Mass Media)</option>
                                 <option value="BA Economics">BA Economics</option>
                                 <option value="BCom">BCom (Accounting & Finance)</option>
-                                <option value="BSc General">BSc Physics / Chem / Bio</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Semester</label>
-                            <select id="semesterFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none">
+                            <select id="semesterFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none cursor-pointer">
                                 <option value="ALL">All Semesters</option>
                                 <option value="Sem 1">Semester 1</option>
                                 <option value="Sem 2">Semester 2</option>
@@ -200,64 +185,57 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Resource Category</label>
-                            <select id="typeFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none">
-                                <option value="ALL">All Resource Types</option>
-                                <option value="PYQ">Question Papers (PYQs)</option>
-                                <option value="Syllabus">Official SXC Syllabus</option>
-                                <option value="Notes">Lecture Notes / Handouts</option>
-                                <option value="Solved Paper">Solved Question Papers</option>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Resource Type</label>
+                            <select id="typeFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none cursor-pointer">
+                                <option value="ALL">All Types</option>
+                                <option value="PYQ">End-Sem Question Papers (PYQ)</option>
+                                <option value="KT PYQ">KT Exam Papers</option>
+                                <option value="Syllabus">Official Syllabus Copy</option>
+                                <option value="Notes">Lecture Notes & Summaries</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <!-- Feed Header -->
                 <div class="flex justify-between items-center pb-2 border-b border-slate-200 dark:border-slate-800">
                     <div class="flex items-center space-x-2">
-                        <h2 class="text-lg font-bold text-sxc-navy dark:text-amber-300">Available Study Materials</h2>
+                        <h2 class="text-lg font-bold text-sxc-navy dark:text-amber-300">Live Verified Study Bank</h2>
                         <span id="resourceCountBadge" class="bg-sxc-navy/10 dark:bg-amber-400/20 text-sxc-navy dark:text-amber-300 font-extrabold text-xs px-2.5 py-1 rounded-full">0 Items</span>
                     </div>
-                    <button onclick="resetFilters()" class="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-sxc-navy dark:hover:text-white flex items-center gap-1 cursor-pointer">
-                        <i class="fa-solid fa-rotate-right"></i> Reset Filters
-                    </button>
                 </div>
 
-                <!-- Empty State Container -->
+                <!-- Empty State -->
                 <div id="emptyState" class="hidden text-center py-12 bg-white dark:bg-slate-900 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
                     <i class="fa-solid fa-folder-open text-5xl text-slate-300 dark:text-slate-700 mb-3"></i>
-                    <h3 class="font-bold text-slate-700 dark:text-slate-200 text-lg">No matching materials found</h3>
-                    <p class="text-slate-400 dark:text-slate-500 text-sm mb-4">Be the first student to upload notes for this subject!</p>
-                    <button onclick="switchTab('upload')" class="px-5 py-2.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-bold rounded-xl text-sm transition shadow-md">
-                        <i class="fa-solid fa-plus-circle mr-1"></i> Upload Material Now
-                    </button>
+                    <h3 class="font-bold text-slate-700 dark:text-slate-200 text-lg">No verified materials found</h3>
+                    <p class="text-slate-400 dark:text-slate-500 text-sm mb-4">Be the first student to upload or check the review queue!</p>
                 </div>
 
-                <!-- Grid of Resources -->
+                <!-- Grid of Live Resources -->
                 <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </section>
 
-            <!-- TAB 2: INDEPENDENT STUDENT UPLOAD -->
+            <!-- TAB 2: STUDENT UPLOAD WITH ANTI-SPAM & REPETITION CHECKER -->
             <section id="viewUpload" class="tab-view hidden max-w-2xl mx-auto">
                 <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
                     <div class="sxc-gradient p-6 text-white gold-border">
                         <h2 class="text-xl font-black flex items-center gap-2">
-                            <i class="fa-solid fa-cloud-arrow-up text-sxc-gold"></i>
-                            Contribute Study Material
+                            <i class="fa-solid fa-shield-halved text-sxc-gold"></i>
+                            Student Contribution & Anti-Spam Engine
                         </h2>
-                        <p class="text-xs text-amber-200/90 mt-1">Upload PYQs, syllabus copies, or handwritten notes to support fellow Xavierites.</p>
+                        <p class="text-xs text-amber-200/90 mt-1">Upload PYQs, KT papers, or notes. Our automated repetition detector scans titles and URLs instantly before sending your submission to the admin review queue.</p>
                     </div>
 
-                    <form id="uploadForm" onsubmit="handleUploadSubmit(event)" class="p-6 space-y-4">
+                    <form id="studentUploadForm" onsubmit="handleStudentUploadSubmit(event)" class="p-6 space-y-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Document Title *</label>
-                            <input type="text" id="upTitle" required placeholder="e.g. EndSem 2023 - Python & Data Structures PYQ" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                            <input type="text" id="studUpTitle" required placeholder="e.g. Sem 3 KT Exam Paper - Database Management" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Department *</label>
-                                <select id="upDept" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                                <select id="studUpDept" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none cursor-pointer">
                                     <option value="">Select Department</option>
                                     <option value="BSc IT">BSc Information Technology</option>
                                     <option value="BSc CS">BSc Computer Science</option>
@@ -265,12 +243,11 @@
                                     <option value="BAMMC">BAMMC (Mass Media)</option>
                                     <option value="BA Economics">BA Economics</option>
                                     <option value="BCom">BCom (Accounting & Finance)</option>
-                                    <option value="BSc General">BSc Physics / Chem / Bio</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Semester *</label>
-                                <select id="upSem" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                                <select id="studUpSem" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none cursor-pointer">
                                     <option value="">Select Semester</option>
                                     <option value="Sem 1">Semester 1</option>
                                     <option value="Sem 2">Semester 2</option>
@@ -285,202 +262,167 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Subject Name *</label>
-                                <input type="text" id="upSubject" required placeholder="e.g. Database Management Systems" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                                <input type="text" id="studUpSubject" required placeholder="e.g. Data Structures" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Resource Category *</label>
-                                <select id="upType" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
-                                    <option value="PYQ">Question Paper (PYQ)</option>
-                                    <option value="Notes">Study Notes / Handouts</option>
-                                    <option value="Syllabus">Official Syllabus Copy</option>
-                                    <option value="Solved Paper">Solved Question Paper</option>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Resource Type *</label>
+                                <select id="studUpType" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none cursor-pointer">
+                                    <option value="PYQ">End-Sem Question Paper (PYQ)</option>
+                                    <option value="KT PYQ">KT Exam Paper</option>
+                                    <option value="Notes">Study Notes</option>
+                                    <option value="Syllabus">Syllabus Copy</option>
                                 </select>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Google Drive or Shareable PDF URL *</label>
-                            <input type="url" id="upUrl" required placeholder="https://drive.google.com/file/d/..." class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
-                            <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-1">Upload your file to Google Drive, set sharing to "Anyone with the link", and paste the link here.</p>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Your Name / Contributor ID (Optional)</label>
-                            <input type="text" id="upContributor" placeholder="e.g. Rohan V. (SYBSc IT)" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Google Drive or PDF URL *</label>
+                            <input type="url" id="studUpUrl" required placeholder="https://drive.google.com/file/d/..." class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
                         </div>
 
                         <div class="pt-2">
                             <button type="submit" class="w-full py-3 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
-                                <i class="fa-solid fa-paper-plane text-sxc-gold"></i>
-                                <span>Publish Material to Portal</span>
+                                <i class="fa-solid fa-shield-check text-sxc-gold"></i>
+                                <span>Run Anti-Spam Check & Submit for Review</span>
                             </button>
                         </div>
                     </form>
                 </div>
             </section>
 
-            <!-- TAB 3: PREMIUM QUESTION BANK & SOLVED PAPERS -->
-            <section id="viewPremium" class="tab-view hidden space-y-6">
-                <!-- Banner -->
-                <div class="sxc-gradient rounded-2xl p-6 sm:p-8 text-white gold-border relative overflow-hidden shadow-xl">
-                    <div class="relative z-10 max-w-2xl">
-                        <span class="bg-sxc-gold text-sxc-navy text-xs font-black px-2.5 py-1 rounded-md uppercase tracking-wider mb-2 inline-block">SXC Top Grade Series</span>
-                        <h2 class="text-2xl sm:text-3xl font-black text-white">Verified Solved Papers & Topper Revision Packs</h2>
-                        <p class="text-sm text-amber-100/90 mt-2">Get access to step-by-step end-semester solutions, verified answer keys by SXC alumni, and exam revision cheat sheets.</p>
-                    </div>
-                </div>
-
-                <!-- Premium Item Cards Grid -->
-                <div id="premiumGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-            </section>
-
-            <!-- TAB 4: BANK & UPI DETAILS INFO PAGE -->
-            <section id="viewPayInfo" class="tab-view hidden max-w-3xl mx-auto space-y-6">
-                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
-                    <div class="sxc-gradient p-6 text-white gold-border">
-                        <h2 class="text-xl font-black flex items-center gap-2">
-                            <i class="fa-solid fa-building-columns text-sxc-gold"></i>
-                            Official Payment & Bank Account Details
-                        </h2>
-                        <p class="text-xs text-amber-200/90 mt-1">Use these verified payment methods to unlock premium solved question paper bundles.</p>
+            <!-- TAB 3: STUDENT SUGGESTIONS & RATING SYSTEM -->
+            <section id="viewSuggestions" class="tab-view hidden max-w-4xl mx-auto space-y-6">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                        <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900/40 rounded-xl flex items-center justify-center text-amber-600 dark:text-amber-400 text-2xl">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-black text-slate-800 dark:text-slate-100">Student Suggestions, Ideas & Portal Rating</h2>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Help us make this portal better for Xavierites! Rate your experience and share new features.</p>
+                        </div>
                     </div>
 
-                    <div class="p-6 space-y-6">
-                        <!-- Direct UPI Box -->
-                        <div class="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 p-5 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
-                            <div class="space-y-1">
-                                <span class="bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200 font-black text-[10px] px-2 py-0.5 rounded uppercase">Primary UPI ID</span>
-                                <h3 id="displayUpiId" class="text-xl font-extrabold text-sxc-navy dark:text-amber-300 font-mono">8928689931@pthdfc</h3>
-                                <p class="text-xs text-slate-600 dark:text-slate-400">Accepts Google Pay, PhonePe, Paytm, BHIM UPI & Banking Apps</p>
+                    <!-- Rating Form -->
+                    <form onsubmit="handleSuggestionSubmit(event)" class="space-y-4 mb-8 bg-slate-50 dark:bg-slate-800/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <h3 class="text-sm font-bold text-sxc-navy dark:text-amber-300 uppercase">Submit Your Idea or Feedback</h3>
+                        
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs font-bold text-slate-600 dark:text-slate-300">Rate Portal:</span>
+                            <div class="flex space-x-1 text-amber-400 text-lg cursor-pointer" id="starContainer">
+                                <i class="fa-solid fa-star" onclick="setRating(1)"></i>
+                                <i class="fa-solid fa-star" onclick="setRating(2)"></i>
+                                <i class="fa-solid fa-star" onclick="setRating(3)"></i>
+                                <i class="fa-solid fa-star" onclick="setRating(4)"></i>
+                                <i class="fa-solid fa-star" onclick="setRating(5)"></i>
                             </div>
-                            <button onclick="copyText('8928689931@pthdfc', 'UPI ID Copied!')" class="px-4 py-2 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-bold rounded-xl shadow text-xs flex items-center gap-1.5 cursor-pointer">
-                                <i class="fa-regular fa-copy"></i> Copy UPI ID
-                            </button>
+                            <span id="ratingText" class="text-xs font-bold text-slate-500 ml-2">(5/5)</span>
                         </div>
 
-                        <!-- Bank Transfer Grid -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-                                <p class="text-xs text-slate-400 uppercase font-bold">Bank Account Number</p>
-                                <p class="text-lg font-black text-slate-800 dark:text-slate-100 font-mono mt-1">XX8018</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-                                <p class="text-xs text-slate-400 uppercase font-bold">IFSC Code</p>
-                                <p class="text-lg font-black text-slate-800 dark:text-slate-100 font-mono mt-1">SBIN0001850</p>
-                            </div>
+                        <div>
+                            <input type="text" id="sugName" placeholder="Your Name / Department (Optional)" class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-sm mb-3 outline-none">
+                            <textarea id="sugText" required rows="3" placeholder="What missing PYQs, KTs, or features would you like to see?" class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-sm outline-none"></textarea>
                         </div>
 
-                        <!-- QR Code Generator Preview -->
-                        <div class="text-center p-6 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
-                            <p class="text-xs font-bold text-slate-500 uppercase">Universal Payment QR Code</p>
-                            <img id="generalQrImg" src="" alt="UPI Payment QR Code" class="w-48 h-48 mx-auto object-contain border-4 border-white dark:border-slate-700 rounded-xl shadow-md">
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Scan using any UPI App on your phone to send payment instantly</p>
-                        </div>
+                        <button type="submit" class="px-5 py-2.5 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl text-xs transition shadow cursor-pointer">
+                            Submit Suggestion
+                        </button>
+                    </form>
+
+                    <!-- Suggestions Stream List -->
+                    <h3 class="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase mb-3">Recent Student Ideas & Admin Replies</h3>
+                    <div id="suggestionsList" class="space-y-4">
+                        <!-- Populated by JS -->
                     </div>
                 </div>
             </section>
 
+            <!-- TAB 4: ADMIN MODERATION PORTAL -->
+            <section id="viewAdmin" class="tab-view hidden max-w-5xl mx-auto space-y-6">
+                <!-- Admin Login Gate -->
+                <div id="adminLoginGate" class="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 text-center mt-10">
+                    <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-sxc-gold">
+                        <i class="fa-solid fa-lock text-2xl text-sxc-navy dark:text-amber-300"></i>
+                    </div>
+                    <h2 class="text-xl font-black text-slate-800 dark:text-slate-100 mb-2">Admin Moderation Gate</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Enter master PIN to review pending draft submissions and respond to student ideas.</p>
+                    
+                    <form onsubmit="verifyAdmin(event)">
+                        <input type="password" id="adminPasscode" placeholder="Enter PIN (Hint: sxc123)" class="w-full text-center px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl mb-4 focus:ring-2 focus:ring-sxc-navy outline-none text-slate-800 dark:text-slate-100 font-mono tracking-widest">
+                        <button type="submit" class="w-full py-3 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Unlock Dashboard</span>
+                            <i class="fa-solid fa-arrow-right-to-bracket text-sxc-gold"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Admin Dashboard -->
+                <div id="adminDashboard" class="hidden space-y-8">
+                    
+                    <!-- Pending Review Queue (Anti-Spam Review System) -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
+                        <div class="flex justify-between items-center mb-4 border-b border-slate-200 dark:border-slate-700 pb-3">
+                            <h3 class="text-lg font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                                <i class="fa-solid fa-clipboard-check text-sxc-gold"></i>
+                                Student Submissions Review Queue (Drafts)
+                            </h3>
+                            <span class="text-xs bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 px-2.5 py-1 rounded-full font-extrabold" id="pendingQueueCount">0 Pending</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-50 dark:bg-slate-800 text-[10px] uppercase font-black text-slate-500 dark:text-slate-400">
+                                        <th class="p-3 rounded-tl-lg">Title & Contributor</th>
+                                        <th class="p-3">Type & Sem</th>
+                                        <th class="p-3">Anti-Spam AI Status</th>
+                                        <th class="p-3 rounded-tr-lg text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pendingTableList" class="text-sm text-slate-700 dark:text-slate-300">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Manage Student Suggestions & Reply Section -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
+                        <div class="flex justify-between items-center mb-4 border-b border-slate-200 dark:border-slate-700 pb-3">
+                            <h3 class="text-lg font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                                <i class="fa-solid fa-comments text-sxc-gold"></i>
+                                Respond to Student Suggestions & Ratings
+                            </h3>
+                        </div>
+                        <div id="adminSuggestionsList" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Live Database Management -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
+                        <div class="flex justify-between items-center mb-4 border-b border-slate-200 dark:border-slate-700 pb-3">
+                            <h3 class="text-lg font-black text-slate-800 dark:text-slate-100">Manage Live Database</h3>
+                            <span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded font-bold" id="adminTotalCount">0 Live Items</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-50 dark:bg-slate-800 text-[10px] uppercase font-black text-slate-500 dark:text-slate-400">
+                                        <th class="p-3 rounded-tl-lg">Resource Title</th>
+                                        <th class="p-3">Department</th>
+                                        <th class="p-3 rounded-tr-lg text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminDataList" class="text-sm text-slate-700 dark:text-slate-300"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
-    <!-- MODAL: Integrated Dynamic UPI Payment Modal -->
-    <div id="payModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-md overflow-hidden transform transition-all">
-            <!-- Modal Header -->
-            <div class="sxc-gradient p-4 text-white flex justify-between items-center gold-border">
-                <div class="flex items-center space-x-2">
-                    <i class="fa-solid fa-lock text-sxc-gold text-lg"></i>
-                    <h3 class="font-extrabold text-base">Unlock Premium Material</h3>
-                </div>
-                <button onclick="closePayModal()" class="text-slate-300 hover:text-white font-bold p-1 cursor-pointer">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <div class="p-5 space-y-4">
-                <!-- Item Summary -->
-                <div class="bg-amber-50 dark:bg-amber-950/40 p-3.5 rounded-xl border border-amber-200 dark:border-amber-800/60">
-                    <p class="text-[11px] text-amber-800 dark:text-amber-300 font-bold uppercase tracking-wider">Selected Solved Bundle</p>
-                    <h4 id="payItemTitle" class="font-extrabold text-sxc-navy dark:text-slate-100 text-sm mt-0.5">SXC Solved Bundle</h4>
-                    <div class="flex justify-between items-center mt-2 pt-2 border-t border-amber-200/60 dark:border-amber-800/60">
-                        <span class="text-xs font-semibold text-slate-600 dark:text-slate-400">Total Price:</span>
-                        <span id="payItemPrice" class="text-xl font-black text-sxc-navy dark:text-sxc-gold">₹49</span>
-                    </div>
-                </div>
-
-                <!-- Payment Options Tabs -->
-                <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300">
-                    <button id="payTabUpi" onclick="setPayMethod('upi')" class="flex-1 py-2 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-sxc-navy dark:text-sxc-gold transition">
-                        <i class="fa-solid fa-qrcode mr-1"></i> Scan UPI QR
-                    </button>
-                    <button id="payTabBank" onclick="setPayMethod('bank')" class="flex-1 py-2 rounded-lg transition hover:text-sxc-navy dark:hover:text-white">
-                        <i class="fa-solid fa-building-columns mr-1"></i> Bank Account
-                    </button>
-                </div>
-
-                <!-- UPI View -->
-                <div id="payViewUpi" class="space-y-3 text-center">
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Scan using GPay, PhonePe, Paytm or BHIM UPI</p>
-                    
-                    <!-- Dynamic QR Code Container -->
-                    <div class="bg-white p-3 border border-slate-200 dark:border-slate-700 rounded-xl inline-block shadow-sm">
-                        <img id="modalUpiQrImg" src="" alt="UPI Payment QR Code" class="w-44 h-44 mx-auto object-contain">
-                    </div>
-
-                    <!-- Direct Mobile Deeplink Button -->
-                    <div id="mobileUpiBtnContainer" class="pt-1">
-                        <a id="mobileUpiDeepLink" href="#" class="w-full py-2.5 bg-sxc-navy hover:bg-sxc-navyLight text-white font-extrabold rounded-xl shadow transition text-xs flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-mobile-screen-button text-sxc-gold"></i> Open UPI App on Phone
-                        </a>
-                    </div>
-
-                    <div class="bg-slate-50 dark:bg-slate-800 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 flex justify-between items-center text-xs">
-                        <span class="text-slate-500 dark:text-slate-400 font-semibold">UPI ID: <strong class="text-slate-800 dark:text-slate-200 font-mono">8928689931@pthdfc</strong></span>
-                        <button onclick="copyText('8928689931@pthdfc', 'UPI ID copied!')" class="text-sxc-navy dark:text-sxc-gold font-bold hover:underline cursor-pointer">
-                            <i class="fa-regular fa-copy"></i> Copy
-                        </button>
-                    </div>
-
-                    <!-- UTR Reference Verification Form -->
-                    <form onsubmit="verifyUpiTxn(event)" class="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                        <label class="block text-left text-xs font-bold text-slate-700 dark:text-slate-300">Enter 12-Digit UTR / Transaction Reference ID *</label>
-                        <input type="text" id="upiTxnInput" required placeholder="e.g. 409283741092" pattern="[0-9A-Za-z]{8,18}" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm text-center font-mono text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
-                        <button type="submit" class="w-full py-2.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-bold rounded-lg shadow transition text-sm flex items-center justify-center gap-1.5 cursor-pointer">
-                            <i class="fa-solid fa-circle-check"></i> Submit Reference & Unlock
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Bank View -->
-                <div id="payViewBank" class="hidden space-y-3">
-                    <div class="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">Account Number:</span>
-                            <span class="font-bold text-slate-800 dark:text-slate-200 font-mono">XX8018</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">IFSC Code:</span>
-                            <span class="font-bold text-slate-800 dark:text-slate-200 font-mono">SBIN0001850</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-400">Bank Branch:</span>
-                            <span class="font-medium text-slate-700 dark:text-slate-300">State Bank of India</span>
-                        </div>
-                    </div>
-
-                    <form onsubmit="verifyUpiTxn(event)" class="space-y-2">
-                        <label class="block text-left text-xs font-bold text-slate-700 dark:text-slate-300">Enter Transaction Reference / UTR Number *</label>
-                        <input type="text" id="bankTxnInput" required placeholder="e.g. 409283741092" pattern="[0-9A-Za-z]{8,18}" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-sm text-center font-mono text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
-                        <button type="submit" class="w-full py-2.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-bold rounded-lg shadow transition text-sm flex items-center justify-center gap-1.5 cursor-pointer">
-                            <i class="fa-solid fa-circle-check"></i> Submit Reference & Unlock
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: Document Previewer Modal -->
+    <!-- MODAL: Document Previewer -->
     <div id="previewModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full max-w-3xl overflow-hidden flex flex-col max-h-[90vh]">
             <div class="sxc-gradient px-6 py-4 text-white flex justify-between items-center gold-border">
@@ -492,22 +434,13 @@
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
-
-            <div class="p-4 sm:p-6 overflow-y-auto flex-1 bg-slate-50 dark:bg-slate-950">
-                <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-center shadow-sm">
-                    <i class="fa-regular fa-file-pdf text-5xl text-sxc-navy dark:text-sxc-gold mb-3"></i>
-                    <h4 id="prevSubject" class="font-extrabold text-slate-800 dark:text-slate-100 text-lg mb-1">Subject Title</h4>
-                    <p id="prevMeta" class="text-xs text-slate-500 dark:text-slate-400 mb-4">BSc IT &bull; Sem 3</p>
-
-                    <!-- Google Drive Embed Frame -->
-                    <div id="iframeWrapper" class="w-full h-80 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 mb-4 hidden">
-                        <iframe id="previewIframe" src="" class="w-full h-full border-0"></iframe>
-                    </div>
-
-                    <a id="prevDownloadLink" href="#" target="_blank" download class="w-full py-3 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-extrabold rounded-xl shadow transition flex items-center justify-center gap-2 text-sm">
-                        <i class="fa-solid fa-arrow-down-to-line"></i> Open PDF / Google Drive Document
-                    </a>
-                </div>
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1 bg-slate-50 dark:bg-slate-950 text-center">
+                <i class="fa-regular fa-file-pdf text-5xl text-sxc-navy dark:text-sxc-gold mb-3"></i>
+                <h4 id="prevSubject" class="font-extrabold text-slate-800 dark:text-slate-100 text-lg mb-1">Subject Title</h4>
+                <p id="prevMeta" class="text-xs text-slate-500 dark:text-slate-400 mb-4">BSc IT &bull; Sem 3</p>
+                <a id="prevDownloadLink" href="#" target="_blank" download class="w-full py-3 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-extrabold rounded-xl shadow transition inline-flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-arrow-down-to-line"></i> Open PDF / Google Drive Document
+                </a>
             </div>
         </div>
     </div>
@@ -518,198 +451,380 @@
         <span id="toastMsg" class="text-sm font-semibold">Notification message</span>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-sxc-navy dark:bg-slate-950 text-slate-300 py-6 border-t-2 border-sxc-gold mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-            <div class="flex items-center space-x-3">
-                <div class="w-7 h-7 rounded-lg bg-sxc-gold text-sxc-navy flex items-center justify-center font-black text-xs">SXC</div>
-                <p class="font-medium text-white">St. Xavier's College (Autonomous), Mumbai &bull; Student Study Portal</p>
-            </div>
-            <p class="text-slate-400">&copy; Built for Xavierites &bull; Single-File Web App (Local Storage Edition)</p>
+            <p class="font-medium text-white">St. Xavier's College (Autonomous), Mumbai &bull; Verified Student Study Portal</p>
+            <p class="text-slate-400">&copy; Built with Review & Anti-Spam Engine for Xavierites</p>
         </div>
     </footer>
 
-    <!-- JavaScript Application Logic -->
     <script>
-        
-        // Static Config
-        const UPI_ID = "8928689931@pthdfc";
-        const BANK_ACC = "XX8018";
-        const BANK_IFSC = "SBIN0001850";
+        let resources = [];
+        let pendingResources = [];
+        let suggestions = [];
+        let currentUser = null;
+        let currentRating = 5;
 
-        // Sample Pre-populated Resources
         const defaultResources = [
             {
                 id: "res-101",
-                title: "EndSem 2023 - Data Structures & Algorithms PYQ",
+                title: "Data Structures - EndSem PYQ 2023",
                 department: "BSc IT",
                 semester: "Sem 3",
-                subject: "Data Structures & Algorithms",
+                subject: "Data Structures",
                 type: "PYQ",
-                contributor: "Dept Academic Council",
+                contributor: "Official Admin",
                 fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
                 date: "2023-11-15"
             },
             {
                 id: "res-102",
-                title: "Autonomous Syllabus Copy (2023-2026)",
-                department: "BSc IT",
-                semester: "Sem 1",
-                subject: "Imperative Programming",
-                type: "Syllabus",
-                contributor: "SXC Council",
-                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-                date: "2023-08-10"
-            },
-            {
-                id: "res-103",
-                title: "Macroeconomics Unit 1-4 Complete Lecture Notes",
-                department: "BA Economics",
-                semester: "Sem 2",
-                subject: "Macroeconomics",
-                type: "Notes",
-                contributor: "Ananya R. (SYBA)",
-                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-                date: "2024-02-01"
-            },
-            {
-                id: "res-104",
-                title: "Financial Management MidSem 2023 Question Paper",
+                title: "BMS Sem 2 Financial Accounting KT Paper",
                 department: "BMS",
-                semester: "Sem 4",
-                subject: "Financial Management",
-                type: "PYQ",
-                contributor: "BMS Student Club",
+                semester: "Sem 2",
+                subject: "Financial Accounting",
+                type: "KT PYQ",
+                contributor: "Official Admin",
                 fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-                date: "2023-10-05"
+                date: "2024-03-10"
             }
         ];
 
-        // Sample Premium Solved Bundles
-        const premiumBundles = [
-            {
-                id: "prem-201",
-                title: "BSc IT End-Sem Solved PYQ Bundle (2020-2023)",
-                department: "BSc IT",
-                semester: "Sem 3",
-                subject: "Data Structures & Database Systems",
-                price: 1,
-                description: "Fully solved end-semester papers with step-by-step algorithms, database schemas, and model answers verified by top rankers.",
-                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-            },
-            {
-                id: "prem-202",
-                title: "BMS Topper Exam Revision Cheat Sheet",
-                department: "BMS",
-                semester: "Sem 4",
-                subject: "Financial Accounting & Valuation",
-                price: 1,
-                description: "Formula sheets, key accounting principles, and 50 solved numerical problems for rapid end-sem revision.",
-                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-            },
-            {
-                id: "prem-203",
-                title: "BCom A+ Grade Complete Revision Pack",
-                department: "BCom",
-                semester: "Sem 2",
-                subject: "Auditing & Cost Accounting",
-                price: 11,
-                description: "Includes last 5 years' solved question papers and high-yield topic predictions for SXC exams.",
-                fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-            }
+        const defaultSuggestions = [
+            { id: 'sug-1', name: "Aarav M. (BSc IT)", rating: 5, text: "Amazing portal! Please add more Sem 4 Java KT papers when possible.", adminReply: "Working on it! Will upload Java KT papers by this weekend.", date: "2026-05-10" }
         ];
-
-        // Global State
-        let resources = [];
-        let unlockedItems = new Set();
-        let activePayItem = null;
 
         window.addEventListener('DOMContentLoaded', () => {
             loadState();
-            generateGeneralQr();
             renderResources();
-            renderPremiumGrid();
+            renderSuggestions();
         });
 
-        // Theme Toggle
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
             const isDark = document.documentElement.classList.contains('dark');
             document.getElementById('themeIcon').className = isDark ? "fa-solid fa-sun text-sxc-gold" : "fa-solid fa-moon text-sxc-gold";
             localStorage.setItem('sxc_theme', isDark ? 'dark' : 'light');
         }
+        if (localStorage.getItem('sxc_theme') === 'dark') document.documentElement.classList.add('dark');
 
-        if (localStorage.getItem('sxc_theme') === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
-
-        // LocalStorage Operations
         function loadState() {
-            const savedRes = localStorage.getItem('sxc_resources_v2');
-            if (savedRes) {
-                try { resources = JSON.parse(savedRes); } catch(e) { resources = [...defaultResources]; }
-            } else {
-                resources = [...defaultResources];
-                saveState();
-            }
-
-            const savedUnlocked = localStorage.getItem('sxc_unlocked_v2');
-            if (savedUnlocked) {
-                try { unlockedItems = new Set(JSON.parse(savedUnlocked)); } catch(e) {}
-            }
+            const savedRes = localStorage.getItem('sxc_live_res_v7');
+            const savedPend = localStorage.getItem('sxc_pend_res_v7');
+            const savedSug = localStorage.getItem('sxc_suggestions_v7');
+            resources = savedRes ? JSON.parse(savedRes) : [...defaultResources];
+            pendingResources = savedPend ? JSON.parse(savedPend) : [];
+            suggestions = savedSug ? JSON.parse(savedSug) : [...defaultSuggestions];
         }
 
         function saveState() {
-            localStorage.setItem('sxc_resources_v2', JSON.stringify(resources));
-            localStorage.setItem('sxc_unlocked_v2', JSON.stringify(Array.from(unlockedItems)));
+            localStorage.setItem('sxc_live_res_v7', JSON.stringify(resources));
+            localStorage.setItem('sxc_pend_res_v7', JSON.stringify(pendingResources));
+            localStorage.setItem('sxc_suggestions_v7', JSON.stringify(suggestions));
         }
 
-        // Generate General QR Code
-        function generateGeneralQr() {
-            const upiUri = `upi://pay?pa=${UPI_ID}&pn=SXC%20Mumbai%20Study%20Portal&mc=0000&mode=02&purpose=00`;
-            const qrUrl = `https://quickchart.io/qr?text=${encodeURIComponent(upiUri)}&size=220&margin=1`;
-            document.getElementById('generalQrImg').src = qrUrl;
+        // Google Classroom Login Simulation
+        function loginWithGoogleClassroom() {
+            currentUser = {
+                name: "Aarav Mehta (Google Classroom)",
+                email: "aarav.mehta@stxaviers.edu",
+                avatar: "https://placehold.co/100x100/0F2C59/E5A93C?text=GC"
+            };
+            updateAuthUI();
+            showToast("Successfully signed in with Google Classroom!");
         }
 
-        // Switch Navigation Tabs
+        // WhatsApp Login Simulation
+        function loginWithWhatsApp() {
+            currentUser = {
+                name: "Rohan Sharma (WhatsApp Student)",
+                email: "+91 98765 43210",
+                avatar: "https://placehold.co/100x100/059669/ffffff?text=WA"
+            };
+            updateAuthUI();
+            showToast("Successfully signed in via WhatsApp!");
+        }
+
+        function updateAuthUI() {
+            if (currentUser) {
+                document.getElementById('authButtonsContainer').classList.add('hidden');
+                document.getElementById('userProfileBadge').classList.remove('hidden');
+                document.getElementById('userName').innerText = currentUser.name;
+                document.getElementById('userAvatar').src = currentUser.avatar;
+            } else {
+                document.getElementById('authButtonsContainer').classList.remove('hidden');
+                document.getElementById('userProfileBadge').classList.add('hidden');
+            }
+        }
+
+        function logoutUser() {
+            currentUser = null;
+            updateAuthUI();
+            showToast("Logged out successfully.");
+        }
+
         function switchTab(tabName) {
             document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
-            
-            const btnMap = { browse: 'tabBtnBrowse', upload: 'tabBtnUpload', premium: 'tabBtnPremium', payinfo: 'tabBtnPayInfo' };
+            const btnMap = { browse: 'tabBtnBrowse', upload: 'tabBtnUpload', suggestions: 'tabBtnSuggestions', admin: 'tabBtnAdmin' };
             Object.keys(btnMap).forEach(key => {
                 const btn = document.getElementById(btnMap[key]);
-                if (key === tabName) {
-                    btn.className = "px-4 py-2 rounded-t-xl bg-white dark:bg-slate-900 text-sxc-navy dark:text-amber-300 font-extrabold flex items-center gap-2 cursor-pointer shadow-sm";
-                } else {
-                    btn.className = "px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition font-bold";
+                if(btn) {
+                    btn.className = (key === tabName) 
+                        ? "px-4 py-2 rounded-t-xl bg-white dark:bg-slate-900 text-sxc-navy dark:text-amber-300 font-extrabold flex items-center gap-2 cursor-pointer shadow-sm whitespace-nowrap"
+                        : "px-4 py-2 rounded-t-xl text-slate-300 hover:text-white flex items-center gap-2 cursor-pointer transition font-bold whitespace-nowrap";
                 }
             });
-
             if (tabName === 'browse') document.getElementById('viewBrowse').classList.remove('hidden');
             if (tabName === 'upload') document.getElementById('viewUpload').classList.remove('hidden');
-            if (tabName === 'premium') document.getElementById('viewPremium').classList.remove('hidden');
-            if (tabName === 'payinfo') document.getElementById('viewPayInfo').classList.remove('hidden');
+            if (tabName === 'suggestions') document.getElementById('viewSuggestions').classList.remove('hidden');
+            if (tabName === 'admin') document.getElementById('viewAdmin').classList.remove('hidden');
         }
 
-        // Render Browse Resources
+        // Automated Anti-Spam & Repetition Detection Engine
+        function analyzeSubmission(newTitle, newUrl) {
+            let flags = [];
+            const cleanTitle = newTitle.trim().toLowerCase();
+            
+            // 1. Gibberish / Keyboard Smash Check
+            const gibberishRegex = /(asdf|qwert|zxcvb|test123|1111|aaaa|asdfgh)/i;
+            if (cleanTitle.length < 5 || gibberishRegex.test(cleanTitle)) {
+                flags.push("Spam Flag: Suspected keyboard smash or test title.");
+            }
+
+            // 2. Exact URL Repetition Check (against live and pending)
+            const duplicateUrl = [...resources, ...pendingResources].some(r => r.fileUrl.trim() === newUrl.trim());
+            if (duplicateUrl) {
+                flags.push("Duplicate Flag: This PDF URL has already been submitted or published.");
+            }
+
+            // 3. Title Exact Repetition Check
+            const duplicateTitle = [...resources, ...pendingResources].some(r => r.title.trim().toLowerCase() === cleanTitle);
+            if (duplicateTitle) {
+                flags.push("Repetition Flag: A document with this exact title already exists.");
+            }
+
+            return flags;
+        }
+
+        function handleStudentUploadSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('studUpTitle').value.trim();
+            const fileUrl = document.getElementById('studUpUrl').value.trim();
+
+            // Run Anti-Spam / Repetition Detection
+            const spamFlags = analyzeSubmission(title, fileUrl);
+            const status = spamFlags.length > 0 ? "Flagged (Needs Admin Review)" : "Passed (Clean Auto-Check)";
+
+            const newRes = {
+                id: 'res-' + Date.now(),
+                title: title,
+                department: document.getElementById('studUpDept').value,
+                semester: document.getElementById('studUpSem').value,
+                subject: document.getElementById('studUpSubject').value.trim(),
+                type: document.getElementById('studUpType').value,
+                fileUrl: fileUrl,
+                contributor: currentUser ? currentUser.name : "Anonymous Student",
+                status: status,
+                flags: spamFlags,
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            pendingResources.unshift(newRes);
+            saveState();
+            document.getElementById('studentUploadForm').reset();
+            
+            if (spamFlags.length > 0) {
+                showToast("Submitted to Review Queue with Spam Flags.");
+            } else {
+                showToast("Material submitted successfully to Draft Review Queue!");
+            }
+            switchTab('browse');
+            renderResources();
+        }
+
+        function setRating(stars) {
+            currentRating = stars;
+            document.getElementById('ratingText').innerText = `(${stars}/5)`;
+        }
+
+        function handleSuggestionSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('sugName').value.trim() || (currentUser ? currentUser.name : "Anonymous Xavierite");
+            const text = document.getElementById('sugText').value.trim();
+
+            suggestions.unshift({
+                id: 'sug-' + Date.now(),
+                name: name,
+                rating: currentRating,
+                text: text,
+                adminReply: "",
+                date: new Date().toISOString().split('T')[0]
+            });
+            saveState();
+            document.getElementById('sugText').value = '';
+            document.getElementById('sugName').value = '';
+            renderSuggestions();
+            showToast("Thank you! Suggestion submitted successfully.");
+        }
+
+        function renderSuggestions() {
+            const container = document.getElementById('suggestionsList');
+            if (suggestions.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400">No suggestions yet. Be the first to share your feedback!</p>`;
+                return;
+            }
+            container.innerHTML = suggestions.map(s => `
+                <div class="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-xs text-sxc-navy dark:text-amber-300">${escapeHtml(s.name)}</span>
+                        <div class="flex text-amber-400 text-xs">
+                            ${Array(s.rating).fill('<i class="fa-solid fa-star"></i>').join('')}
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHtml(s.text)}</p>
+                    <span class="text-[10px] text-slate-400 mt-2 block">${s.date}</span>
+                    
+                    ${s.adminReply ? `
+                        <div class="mt-3 pl-3 border-l-2 border-sxc-gold bg-amber-50/50 dark:bg-amber-950/20 p-2.5 rounded-r-xl">
+                            <span class="text-[10px] font-black uppercase text-sxc-gold block mb-0.5">Admin Response:</span>
+                            <p class="text-xs text-slate-800 dark:text-slate-200">${escapeHtml(s.adminReply)}</p>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function verifyAdmin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminPasscode').value;
+            if (pass === 'sxc123') {
+                document.getElementById('adminLoginGate').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                document.getElementById('adminPasscode').value = '';
+                renderAdminTables();
+                showToast("Admin Access Granted!");
+            } else {
+                showToast("Incorrect PIN. Hint: sxc123");
+            }
+        }
+
+        function renderAdminTables() {
+            // Pending Table
+            const pendTbody = document.getElementById('pendingTableList');
+            document.getElementById('pendingQueueCount').innerText = `${pendingResources.length} Pending`;
+            const badge = document.getElementById('pendingCountBadge');
+            if(pendingResources.length > 0) {
+                badge.innerText = pendingResources.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            if(pendingResources.length === 0) {
+                pendTbody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-slate-400">No pending submissions in review queue.</td></tr>`;
+            } else {
+                pendTbody.innerHTML = pendingResources.map((res, index) => `
+                    <tr class="border-b border-slate-200 dark:border-slate-700">
+                        <td class="p-3">
+                            <div class="font-bold text-slate-800 dark:text-slate-200">${escapeHtml(res.title)}</div>
+                            <div class="text-[10px] text-slate-500">By ${escapeHtml(res.contributor)}</div>
+                        </td>
+                        <td class="p-3 text-xs">${res.type} • ${res.semester}</td>
+                        <td class="p-3 text-xs">
+                            <span class="px-2 py-0.5 rounded font-bold ${res.flags.length > 0 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
+                                ${res.status}
+                            </span>
+                            ${res.flags.length > 0 ? `<div class="text-[10px] text-red-500 mt-0.5">${res.flags[0]}</div>` : ''}
+                        </td>
+                        <td class="p-3 text-right space-x-1">
+                            <button onclick="approvePending(${index})" class="px-2.5 py-1 bg-green-600 hover:bg-green-700 text-white rounded text-xs font-bold cursor-pointer">Approve</button>
+                            <button onclick="rejectPending(${index})" class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white rounded text-xs font-bold cursor-pointer">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            // Admin Suggestions Response Table
+            const adminSugContainer = document.getElementById('adminSuggestionsList');
+            if (suggestions.length === 0) {
+                adminSugContainer.innerHTML = `<p class="text-xs text-slate-400">No suggestions to respond to.</p>`;
+            } else {
+                adminSugContainer.innerHTML = suggestions.map(s => `
+                    <div class="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-xs text-sxc-navy dark:text-amber-300">${escapeHtml(s.name)}</span>
+                            <span class="text-[10px] text-slate-400">${s.date}</span>
+                        </div>
+                        <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHtml(s.text)}</p>
+                        <div class="pt-2 flex gap-2">
+                            <input type="text" id="replyInput-${s.id}" value="${s.adminReply || ''}" placeholder="Type admin response to student..." class="flex-1 px-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-xs outline-none">
+                            <button onclick="saveAdminReply('${s.id}')" class="px-3 py-1.5 bg-sxc-navy hover:bg-sxc-navyLight text-white rounded-lg text-xs font-bold cursor-pointer">Send Reply</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Live Database Table
+            const liveTbody = document.getElementById('adminDataList');
+            document.getElementById('adminTotalCount').innerText = `${resources.length} Live Items`;
+            liveTbody.innerHTML = resources.map(res => `
+                <tr class="border-b border-slate-200 dark:border-slate-700">
+                    <td class="p-3 font-bold text-slate-800 dark:text-slate-200">${escapeHtml(res.title)}</td>
+                    <td class="p-3 text-xs">${escapeHtml(res.department)} • ${escapeHtml(res.type)}</td>
+                    <td class="p-3 text-right">
+                        <button onclick="deleteLiveResource('${res.id}')" class="px-2.5 py-1 bg-red-100 text-red-600 rounded text-xs font-bold cursor-pointer">Delete Live</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function saveAdminReply(sugId) {
+            const inputVal = document.getElementById(`replyInput-${sugId}`).value.trim();
+            const sug = suggestions.find(s => s.id === sugId);
+            if (sug) {
+                sug.adminReply = inputVal;
+                saveState();
+                renderAdminTables();
+                renderSuggestions();
+                showToast("Admin response saved successfully!");
+            }
+        }
+
+        function approvePending(index) {
+            const item = pendingResources.splice(index, 1)[0];
+            resources.unshift(item);
+            saveState();
+            renderAdminTables();
+            renderResources();
+            showToast("Submission approved and published live!");
+        }
+
+        function rejectPending(index) {
+            pendingResources.splice(index, 1);
+            saveState();
+            renderAdminTables();
+            showToast("Submission deleted from review queue.");
+        }
+
+        function deleteLiveResource(id) {
+            resources = resources.filter(r => r.id !== id);
+            saveState();
+            renderAdminTables();
+            renderResources();
+            showToast("Resource deleted from live portal.");
+        }
+
         function renderResources() {
             const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
             const deptVal = document.getElementById('departmentFilter').value;
             const semVal = document.getElementById('semesterFilter').value;
             const typeVal = document.getElementById('typeFilter').value;
 
-            document.getElementById('clearSearchBtn').classList.toggle('hidden', searchVal.length === 0);
-
             const filtered = resources.filter(res => {
-                const matchSearch = searchVal === '' || 
-                    res.title.toLowerCase().includes(searchVal) ||
-                    res.subject.toLowerCase().includes(searchVal) ||
-                    res.department.toLowerCase().includes(searchVal);
-                
+                const matchSearch = searchVal === '' || res.title.toLowerCase().includes(searchVal) || res.subject.toLowerCase().includes(searchVal);
                 const matchDept = deptVal === 'ALL' || res.department === deptVal;
                 const matchSem = semVal === 'ALL' || res.semester === semVal;
                 const matchType = typeVal === 'ALL' || res.type === typeVal;
-
                 return matchSearch && matchDept && matchSem && matchType;
             });
 
@@ -727,220 +842,43 @@
 
             empty.classList.add('hidden');
             grid.innerHTML = filtered.map(item => `
-                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm card-hover flex flex-col justify-between overflow-hidden">
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm card-hover flex flex-col justify-between overflow-hidden">
                     <div class="p-5">
                         <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full ${getBadgeStyle(item.type)}">
-                                ${item.type}
-                            </span>
-                            <span class="text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 rounded-md">
-                                ${item.semester}
-                            </span>
+                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">${item.type}</span>
+                            <span class="text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 rounded-md">${item.semester}</span>
                         </div>
-
-                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug mb-1 line-clamp-2 hover:text-sxc-navy dark:hover:text-amber-300 cursor-pointer transition" onclick="openPreviewModal('${item.id}')">
-                            ${escapeHtml(item.title)}
-                        </h3>
-                        
-                        <p class="text-xs font-semibold text-sxc-navy dark:text-amber-300/90 mb-3 flex items-center gap-1">
-                            <i class="fa-solid fa-book-bookmark text-sxc-gold"></i>
-                            <span>${escapeHtml(item.subject)}</span>
-                        </p>
-
-                        <div class="text-xs text-slate-500 dark:text-slate-400 space-y-1 bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
-                            <div class="flex justify-between">
-                                <span class="text-slate-400 dark:text-slate-500">Dept:</span>
-                                <span class="font-medium text-slate-700 dark:text-slate-300">${escapeHtml(item.department)}</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-400 dark:text-slate-500">Contributed by:</span>
-                                <span class="font-medium text-slate-700 dark:text-slate-300 truncate max-w-[130px]">${escapeHtml(item.contributor || 'Student')}</span>
-                            </div>
-                        </div>
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug mb-1 cursor-pointer" onclick="openPreview('${item.id}')">${escapeHtml(item.title)}</h3>
+                        <p class="text-xs font-semibold text-sxc-navy dark:text-amber-300 mb-1">${escapeHtml(item.subject)} &bull; ${escapeHtml(item.department)}</p>
+                        <p class="text-[10px] text-slate-400">Contributor: ${escapeHtml(item.contributor)}</p>
                     </div>
                     <div class="px-5 py-3 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                        <button onclick="openPreviewModal('${item.id}')" class="text-xs font-extrabold text-sxc-navy dark:text-amber-300 hover:underline flex items-center gap-1 cursor-pointer">
-                            <i class="fa-regular fa-eye"></i> Quick View
-                        </button>
-                        <a href="${item.fileUrl}" target="_blank" download class="px-3 py-1.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy text-xs font-extrabold rounded-lg shadow-sm transition flex items-center gap-1">
-                            <i class="fa-solid fa-download"></i> Get File
-                        </a>
+                        <button onclick="openPreview('${item.id}')" class="text-xs font-extrabold text-sxc-navy dark:text-amber-300 hover:underline cursor-pointer">Quick View</button>
+                        <a href="${item.fileUrl}" target="_blank" download class="px-3 py-1.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy text-xs font-extrabold rounded-lg shadow-sm transition">Get PDF</a>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Render Premium Bank Grid
-        function renderPremiumGrid() {
-            const grid = document.getElementById('premiumGrid');
-            grid.innerHTML = premiumBundles.map(bundle => {
-                const isUnlocked = unlockedItems.has(bundle.id);
-                return `
-                    <div class="bg-white dark:bg-slate-900 rounded-2xl border ${isUnlocked ? 'border-green-400 dark:border-green-600' : 'border-amber-200 dark:border-amber-800/60'} shadow-md card-hover flex flex-col justify-between overflow-hidden relative">
-                        <div class="p-5">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded ${isUnlocked ? 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'}">
-                                    ${isUnlocked ? 'Unlocked Pack' : 'Premium Pack'}
-                                </span>
-                                <span class="text-lg font-black text-sxc-navy dark:text-sxc-gold">₹${bundle.price}</span>
-                            </div>
-                            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base mb-1">${escapeHtml(bundle.title)}</h3>
-                            <p class="text-xs font-bold text-sxc-navy dark:text-amber-300 mb-2">${bundle.department} &bull; ${bundle.semester}</p>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">${escapeHtml(bundle.description)}</p>
-                        </div>
-                        <div class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
-                            ${isUnlocked ? `
-                                <a href="${bundle.fileUrl}" target="_blank" download class="w-full py-2.5 bg-green-600 hover:bg-green-700 text-white font-extrabold rounded-xl shadow transition text-xs flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-file-arrow-down"></i> Download Solved Bundle
-                                </a>
-                            ` : `
-                                <button onclick="openPayModal('${bundle.id}')" class="w-full py-2.5 bg-sxc-gold hover:bg-sxc-goldHover text-sxc-navy font-extrabold rounded-xl shadow transition text-xs flex items-center justify-center gap-1.5 cursor-pointer">
-                                    <i class="fa-solid fa-lock"></i> Unlock Solved Set (₹${bundle.price})
-                                </button>
-                            `}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
+        function applyFilters() { renderResources(); }
 
-        // Student Independent Upload Form Submission
-        function handleUploadSubmit(e) {
-            e.preventDefault();
-            const newRes = {
-                id: 'res-' + Date.now(),
-                title: document.getElementById('upTitle').value.trim(),
-                department: document.getElementById('upDept').value,
-                semester: document.getElementById('upSem').value,
-                subject: document.getElementById('upSubject').value.trim(),
-                type: document.getElementById('upType').value,
-                fileUrl: document.getElementById('upUrl').value.trim(),
-                contributor: document.getElementById('upContributor').value.trim() || 'Student',
-                date: new Date().toISOString().split('T')[0]
-            };
-
-            resources.unshift(newRes);
-            saveState();
-            document.getElementById('uploadForm').reset();
-            showToast('Material published successfully to portal!');
-            switchTab('browse');
-            renderResources();
-        }
-
-        // Payment Modal Controls
-        function openPayModal(bundleId) {
-            const bundle = premiumBundles.find(b => b.id === bundleId);
-            if (!bundle) return;
-
-            activePayItem = bundle;
-            document.getElementById('payItemTitle').innerText = bundle.title;
-            document.getElementById('payItemPrice').innerText = `₹${bundle.price}`;
-
-            // Build standard UPI intent string
-            const upiString = `upi://pay?pa=${UPI_ID}&pn=SXC%20Mumbai%20Study%20Portal&am=${bundle.price}&cu=INR&tn=SXC%20Material%20${bundle.id}`;
-            const qrUrl = `https://quickchart.io/qr?text=${encodeURIComponent(upiString)}&size=200&margin=1`;
-            
-            document.getElementById('modalUpiQrImg').src = qrUrl;
-            document.getElementById('mobileUpiDeepLink').href = upiString;
-
-            document.getElementById('payModal').classList.remove('hidden');
-        }
-
-        function closePayModal() {
-            document.getElementById('payModal').classList.add('hidden');
-            activePayItem = null;
-        }
-
-        function setPayMethod(method) {
-            if (method === 'upi') {
-                document.getElementById('payViewUpi').classList.remove('hidden');
-                document.getElementById('payViewBank').classList.add('hidden');
-                document.getElementById('payTabUpi').className = "flex-1 py-2 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-sxc-navy dark:text-sxc-gold font-bold";
-                document.getElementById('payTabBank').className = "flex-1 py-2 rounded-lg hover:text-sxc-navy dark:hover:text-white font-bold";
-            } else {
-                document.getElementById('payViewUpi').classList.add('hidden');
-                document.getElementById('payViewBank').classList.remove('hidden');
-                document.getElementById('payTabBank').className = "flex-1 py-2 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-sxc-navy dark:text-sxc-gold font-bold";
-                document.getElementById('payTabUpi').className = "flex-1 py-2 rounded-lg hover:text-sxc-navy dark:hover:text-white font-bold";
-            }
-        }
-
-        function verifyUpiTxn(e) {
-            e.preventDefault();
-            const txnInput = document.getElementById('upiTxnInput').value.trim() || document.getElementById('bankTxnInput').value.trim();
-            if (txnInput.length < 8) {
-                showToast("Please enter a valid 12-digit UTR reference ID.");
-                return;
-            }
-
-            if (activePayItem) {
-                unlockedItems.add(activePayItem.id);
-                saveState();
-                closePayModal();
-                renderPremiumGrid();
-                showToast("Payment verified! Solved material unlocked.");
-            }
-        }
-
-        // Previewer Controls
-        function openPreviewModal(id) {
+        function openPreview(id) {
             const item = resources.find(r => r.id === id);
             if (!item) return;
-
             document.getElementById('prevTitle').innerText = item.title;
             document.getElementById('prevSubject').innerText = item.subject;
-            document.getElementById('prevMeta').innerText = `${item.department} • ${item.semester}`;
-            document.getElementById('prevBadge').innerText = item.type;
+            document.getElementById('prevMeta').innerText = `${item.department} • ${item.semester} • By ${item.contributor}`;
             document.getElementById('prevDownloadLink').href = item.fileUrl;
-
-            const wrapper = document.getElementById('iframeWrapper');
-            const iframe = document.getElementById('previewIframe');
-            
-            if (item.fileUrl.includes('drive.google.com')) {
-                const embedUrl = item.fileUrl.replace('/view', '/preview');
-                iframe.src = embedUrl;
-                wrapper.classList.remove('hidden');
-            } else {
-                wrapper.classList.add('hidden');
-            }
-
             document.getElementById('previewModal').classList.remove('hidden');
         }
 
-        function closePreviewModal() {
-            document.getElementById('previewModal').classList.add('hidden');
-        }
-
-        // Helper Utilities
-        function applyFilters() { renderResources(); }
-        function clearSearch() { document.getElementById('searchInput').value = ''; renderResources(); }
-        function resetFilters() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('departmentFilter').value = 'ALL';
-            document.getElementById('semesterFilter').value = 'ALL';
-            document.getElementById('typeFilter').value = 'ALL';
-            renderResources();
-        }
-
-        function getBadgeStyle(type) {
-            switch(type) {
-                case 'PYQ': return 'badge-pyq';
-                case 'Syllabus': return 'badge-syllabus';
-                case 'Notes': return 'badge-notes';
-                default: return 'badge-premium';
-            }
-        }
-
-        function copyText(text, msg) {
-            navigator.clipboard.writeText(text);
-            showToast(msg);
-        }
+        function closePreviewModal() { document.getElementById('previewModal').classList.add('hidden'); }
 
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
             toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3200);
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         }
 
         function escapeHtml(str) {
