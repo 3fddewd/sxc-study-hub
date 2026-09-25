@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St. Xavier's College Mumbai - Verified Study Portal</title>
+    <title>St. Xavier's College Mumbai - Verified Study Portal (Cloud Edition)</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -67,6 +67,19 @@
         .dark ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .dark ::-webkit-scrollbar-thumb { background: #334155; }
+        
+        select optgroup {
+            background: #f1f5f9;
+            color: #0F2C59;
+            font-weight: 800;
+        }
+        .dark select optgroup {
+            background: #1e293b;
+            color: #E5A93C;
+        }
+        select option {
+            font-weight: 500;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased">
@@ -86,11 +99,14 @@
                                 <h1 class="text-xl font-black tracking-tight text-white leading-none">ST. XAVIER'S COLLEGE</h1>
                                 <span class="bg-sxc-gold text-sxc-navy text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider">MUMBAI</span>
                             </div>
-                            <p class="text-xs text-amber-200/90 font-medium tracking-wide mt-0.5">Verified PYQs, KTs, Syllabus & Student Study Hub</p>
+                            <div class="flex items-center gap-2 mt-0.5">
+                                <p class="text-xs text-amber-200/90 font-medium tracking-wide">Verified PYQs, KTs, Syllabus & Student Hub</p>
+                                <span id="dbStatusBadge" class="bg-amber-500/20 text-amber-300 border border-amber-400/30 text-[10px] font-extrabold px-2 py-0.5 rounded-full">Connecting DB...</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Auth Options (Google Classroom & WhatsApp Login) & Dark Mode -->
+                    <!-- Auth Options & Dark Mode -->
                     <div class="flex items-center space-x-2.5 flex-wrap gap-y-2">
                         
                         <!-- Logged Out Auth Buttons -->
@@ -163,13 +179,72 @@
                         <div>
                             <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1">Department</label>
                             <select id="departmentFilter" onchange="applyFilters()" class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 text-sm font-medium focus:ring-2 focus:ring-sxc-navy outline-none cursor-pointer">
-                                <option value="ALL">All Departments</option>
-                                <option value="BSc IT">BSc Information Technology</option>
-                                <option value="BSc CS">BSc Computer Science</option>
-                                <option value="BMS">BMS (Management Studies)</option>
-                                <option value="BAMMC">BAMMC (Mass Media)</option>
-                                <option value="BA Economics">BA Economics</option>
-                                <option value="BCom">BCom (Accounting & Finance)</option>
+                                <option value="ALL">All Departments & Programs</option>
+                                
+                                <optgroup label="UG - Science (BSc)">
+                                    <option value="BSc IT">BSc Information Technology (IT)</option>
+                                    <option value="BSc Biotechnology">BSc Biotechnology</option>
+                                    <option value="BSc Botany">BSc Botany</option>
+                                    <option value="BSc Chemistry">BSc Chemistry</option>
+                                    <option value="BSc Computational Biology">BSc Computational Biology</option>
+                                    <option value="BSc Geology">BSc Geology</option>
+                                    <option value="BSc Life Science">BSc Life Science & Biochemistry</option>
+                                    <option value="BSc Mathematics">BSc Mathematics</option>
+                                    <option value="BSc Microbiology">BSc Microbiology</option>
+                                    <option value="BSc Physics">BSc Physics</option>
+                                    <option value="BSc Statistics">BSc Statistics</option>
+                                    <option value="BSc Zoology">BSc Zoology</option>
+                                </optgroup>
+
+                                <optgroup label="UG - Arts (BA)">
+                                    <option value="BA Economics">BA Economics</option>
+                                    <option value="BA Psychology">BA Psychology</option>
+                                    <option value="BA Political Science">BA Political Science</option>
+                                    <option value="BA History">BA History</option>
+                                    <option value="BA Sociology">BA Sociology</option>
+                                    <option value="BA Anthropology">BA Anthropology</option>
+                                    <option value="BA AIHCA">BA Ancient Indian History, Culture & Archaeology</option>
+                                    <option value="BA Languages">BA Languages (English, French, Hindi)</option>
+                                    <option value="BMM">BMM (Mass Media)</option>
+                                </optgroup>
+
+                                <optgroup label="UG - Commerce & Management">
+                                    <option value="BCom">BCom (General & Evening)</option>
+                                    <option value="BAF">BAF (Accounting & Finance)</option>
+                                    <option value="BMS">BMS (Management Studies)</option>
+                                </optgroup>
+
+                                <optgroup label="Postgraduate (MA & MSc)">
+                                    <option value="MA Economics">MA Economics</option>
+                                    <option value="MA Psychology">MA Psychology</option>
+                                    <option value="MA Public Policy">MA Public Policy</option>
+                                    <option value="MA AIHCA">MA Ancient Indian History, Culture & Archaeology</option>
+                                    <option value="MSc Big Data Analytics">MSc Big Data Analytics</option>
+                                    <option value="MSc Biotechnology">MSc Biotechnology</option>
+                                    <option value="MSc Botany">MSc Botany</option>
+                                    <option value="MSc Geology">MSc Geology</option>
+                                    <option value="MSc Life Science">MSc Life Science</option>
+                                    <option value="MSc Microbiology">MSc Microbiology</option>
+                                    <option value="MSc Physics">MSc Physics</option>
+                                </optgroup>
+
+                                <optgroup label="Diplomas & Certificates">
+                                    <option value="PG Diploma Clinical Research">PG Diploma Clinical Research</option>
+                                    <option value="PG Diploma Forensic Science">PG Diploma Forensic Science</option>
+                                    <option value="PG Diploma Environmental Forensics">PG Diploma Environmental Forensics</option>
+                                    <option value="PG Diploma IPR">PG Diploma Intellectual Property Rights</option>
+                                    <option value="PG Diploma Counselling">PG Diploma Counselling</option>
+                                    <option value="PG Diploma Expressive Arts Therapy">PG Diploma Expressive Arts Therapy</option>
+                                    <option value="PG Diploma Gemmology">PG Diploma Gemmology</option>
+                                    <option value="Certificate Forensic Biology">Certificate Forensic Biology</option>
+                                    <option value="Certificate Bioinformatics">Certificate Bioinformatics (Hybrid)</option>
+                                </optgroup>
+
+                                <optgroup label="Doctoral">
+                                    <option value="PhD Arts">PhD Arts</option>
+                                    <option value="PhD Science">PhD Science</option>
+                                    <option value="PhD Commerce">PhD Commerce</option>
+                                </optgroup>
                             </select>
                         </div>
                         <div>
@@ -182,6 +257,11 @@
                                 <option value="Sem 4">Semester 4</option>
                                 <option value="Sem 5">Semester 5</option>
                                 <option value="Sem 6">Semester 6</option>
+                                <option value="PG Sem 1">PG Semester 1</option>
+                                <option value="PG Sem 2">PG Semester 2</option>
+                                <option value="PG Sem 3">PG Semester 3</option>
+                                <option value="PG Sem 4">PG Semester 4</option>
+                                <option value="General/Annual">General / Annual Pattern</option>
                             </select>
                         </div>
                         <div>
@@ -234,19 +314,78 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Department *</label>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Department/Program *</label>
                                 <select id="studUpDept" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none cursor-pointer">
-                                    <option value="">Select Department</option>
-                                    <option value="BSc IT">BSc Information Technology</option>
-                                    <option value="BSc CS">BSc Computer Science</option>
-                                    <option value="BMS">BMS (Management Studies)</option>
-                                    <option value="BAMMC">BAMMC (Mass Media)</option>
-                                    <option value="BA Economics">BA Economics</option>
-                                    <option value="BCom">BCom (Accounting & Finance)</option>
+                                    <option value="">Select Program</option>
+                                    
+                                    <optgroup label="UG - Science (BSc)">
+                                        <option value="BSc IT">BSc Information Technology (IT)</option>
+                                        <option value="BSc Biotechnology">BSc Biotechnology</option>
+                                        <option value="BSc Botany">BSc Botany</option>
+                                        <option value="BSc Chemistry">BSc Chemistry</option>
+                                        <option value="BSc Computational Biology">BSc Computational Biology</option>
+                                        <option value="BSc Geology">BSc Geology</option>
+                                        <option value="BSc Life Science">BSc Life Science & Biochemistry</option>
+                                        <option value="BSc Mathematics">BSc Mathematics</option>
+                                        <option value="BSc Microbiology">BSc Microbiology</option>
+                                        <option value="BSc Physics">BSc Physics</option>
+                                        <option value="BSc Statistics">BSc Statistics</option>
+                                        <option value="BSc Zoology">BSc Zoology</option>
+                                    </optgroup>
+
+                                    <optgroup label="UG - Arts (BA)">
+                                        <option value="BA Economics">BA Economics</option>
+                                        <option value="BA Psychology">BA Psychology</option>
+                                        <option value="BA Political Science">BA Political Science</option>
+                                        <option value="BA History">BA History</option>
+                                        <option value="BA Sociology">BA Sociology</option>
+                                        <option value="BA Anthropology">BA Anthropology</option>
+                                        <option value="BA AIHCA">BA Ancient Indian History, Culture & Archaeology</option>
+                                        <option value="BA Languages">BA Languages (English, French, Hindi)</option>
+                                        <option value="BMM">BMM (Mass Media)</option>
+                                    </optgroup>
+
+                                    <optgroup label="UG - Commerce & Management">
+                                        <option value="BCom">BCom (General & Evening)</option>
+                                        <option value="BAF">BAF (Accounting & Finance)</option>
+                                        <option value="BMS">BMS (Management Studies)</option>
+                                    </optgroup>
+
+                                    <optgroup label="Postgraduate (MA & MSc)">
+                                        <option value="MA Economics">MA Economics</option>
+                                        <option value="MA Psychology">MA Psychology</option>
+                                        <option value="MA Public Policy">MA Public Policy</option>
+                                        <option value="MA AIHCA">MA Ancient Indian History, Culture & Archaeology</option>
+                                        <option value="MSc Big Data Analytics">MSc Big Data Analytics</option>
+                                        <option value="MSc Biotechnology">MSc Biotechnology</option>
+                                        <option value="MSc Botany">MSc Botany</option>
+                                        <option value="MSc Geology">MSc Geology</option>
+                                        <option value="MSc Life Science">MSc Life Science</option>
+                                        <option value="MSc Microbiology">MSc Microbiology</option>
+                                        <option value="MSc Physics">MSc Physics</option>
+                                    </optgroup>
+
+                                    <optgroup label="Diplomas & Certificates">
+                                        <option value="PG Diploma Clinical Research">PG Diploma Clinical Research</option>
+                                        <option value="PG Diploma Forensic Science">PG Diploma Forensic Science</option>
+                                        <option value="PG Diploma Environmental Forensics">PG Diploma Environmental Forensics</option>
+                                        <option value="PG Diploma IPR">PG Diploma Intellectual Property Rights</option>
+                                        <option value="PG Diploma Counselling">PG Diploma Counselling</option>
+                                        <option value="PG Diploma Expressive Arts Therapy">PG Diploma Expressive Arts Therapy</option>
+                                        <option value="PG Diploma Gemmology">PG Diploma Gemmology</option>
+                                        <option value="Certificate Forensic Biology">Certificate Forensic Biology</option>
+                                        <option value="Certificate Bioinformatics">Certificate Bioinformatics (Hybrid)</option>
+                                    </optgroup>
+
+                                    <optgroup label="Doctoral">
+                                        <option value="PhD Arts">PhD Arts</option>
+                                        <option value="PhD Science">PhD Science</option>
+                                        <option value="PhD Commerce">PhD Commerce</option>
+                                    </optgroup>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Semester *</label>
+                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Semester/Year *</label>
                                 <select id="studUpSem" required class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none cursor-pointer">
                                     <option value="">Select Semester</option>
                                     <option value="Sem 1">Semester 1</option>
@@ -255,6 +394,11 @@
                                     <option value="Sem 4">Semester 4</option>
                                     <option value="Sem 5">Semester 5</option>
                                     <option value="Sem 6">Semester 6</option>
+                                    <option value="PG Sem 1">PG Semester 1</option>
+                                    <option value="PG Sem 2">PG Semester 2</option>
+                                    <option value="PG Sem 3">PG Semester 3</option>
+                                    <option value="PG Sem 4">PG Semester 4</option>
+                                    <option value="General/Annual">General / Annual Pattern</option>
                                 </select>
                             </div>
                         </div>
@@ -262,7 +406,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Subject Name *</label>
-                                <input type="text" id="studUpSubject" required placeholder="e.g. Data Structures" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
+                                <input type="text" id="studUpSubject" required placeholder="e.g. Data Structures, Macroeconomics" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-sxc-navy outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Resource Type *</label>
@@ -359,7 +503,7 @@
                 <!-- Admin Dashboard -->
                 <div id="adminDashboard" class="hidden space-y-8">
                     
-                    <!-- Pending Review Queue (Anti-Spam Review System) -->
+                    <!-- Pending Review Queue -->
                     <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
                         <div class="flex justify-between items-center mb-4 border-b border-slate-200 dark:border-slate-700 pb-3">
                             <h3 class="text-lg font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
@@ -458,6 +602,42 @@
         </div>
     </footer>
 
+    <!-- Firebase SDK & Database Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // ==========================================
+        // FIREBASE CONFIG KEYS (YOUR LIVE DATABASE)
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyClgtxGYcHTrpSGygUWhUhpHEqPUbU_Wos",
+            authDomain: "sxc-portal.firebaseapp.com",
+            projectId: "sxc-portal",
+            storageBucket: "sxc-portal.firebasestorage.app",
+            messagingSenderId: "140939500137",
+            appId: "1:140939500137:web:3ca493698a2359b69ea0f8",
+            measurementId: "G-08WC99F9GQ"
+        };
+
+        let db = null;
+        let useCloudDB = false;
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            useCloudDB = true;
+            document.getElementById('dbStatusBadge').innerText = "Cloud DB Live (Firebase)";
+            document.getElementById('dbStatusBadge').className = "bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[10px] font-extrabold px-2 py-0.5 rounded-full";
+        } catch (e) {
+            console.warn("Firebase not configured properly, using localStorage mode.", e);
+            document.getElementById('dbStatusBadge').innerText = "Local Mode";
+        }
+
+        window.sxcDB = db;
+        window.useCloudDB = useCloudDB;
+    </script>
+
     <script>
         let resources = [];
         let pendingResources = [];
@@ -494,8 +674,8 @@
             { id: 'sug-1', name: "Aarav M. (BSc IT)", rating: 5, text: "Amazing portal! Please add more Sem 4 Java KT papers when possible.", adminReply: "Working on it! Will upload Java KT papers by this weekend.", date: "2026-05-10" }
         ];
 
-        window.addEventListener('DOMContentLoaded', () => {
-            loadState();
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadData();
             renderResources();
             renderSuggestions();
         });
@@ -508,19 +688,54 @@
         }
         if (localStorage.getItem('sxc_theme') === 'dark') document.documentElement.classList.add('dark');
 
-        function loadState() {
-            const savedRes = localStorage.getItem('sxc_live_res_v7');
-            const savedPend = localStorage.getItem('sxc_pend_res_v7');
-            const savedSug = localStorage.getItem('sxc_suggestions_v7');
+        async function loadData() {
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    const { collection, getDocs } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+                    
+                    // Load Live Resources
+                    const resSnap = await getDocs(collection(window.sxcDB, "resources"));
+                    if (!resSnap.empty) {
+                        resources = [];
+                        resSnap.forEach(docSnap => resources.push({ id: docSnap.id, ...docSnap.data() }));
+                    } else {
+                        resources = [...defaultResources];
+                    }
+
+                    // Load Pending Queue
+                    const pendSnap = await getDocs(collection(window.sxcDB, "pending_resources"));
+                    pendingResources = [];
+                    pendSnap.forEach(docSnap => pendingResources.push({ id: docSnap.id, ...docSnap.data() }));
+
+                    // Load Suggestions
+                    const sugSnap = await getDocs(collection(window.sxcDB, "suggestions"));
+                    if (!sugSnap.empty) {
+                        suggestions = [];
+                        sugSnap.forEach(docSnap => suggestions.push({ id: docSnap.id, ...docSnap.data() }));
+                    } else {
+                        suggestions = [...defaultSuggestions];
+                    }
+                    return;
+                } catch (e) {
+                    console.error("Error loading from Firestore, falling back to localStorage:", e);
+                }
+            }
+
+            // LocalStorage Fallback
+            const savedRes = localStorage.getItem('sxc_live_res_v8');
+            const savedPend = localStorage.getItem('sxc_pend_res_v8');
+            const savedSug = localStorage.getItem('sxc_suggestions_v8');
             resources = savedRes ? JSON.parse(savedRes) : [...defaultResources];
             pendingResources = savedPend ? JSON.parse(savedPend) : [];
             suggestions = savedSug ? JSON.parse(savedSug) : [...defaultSuggestions];
         }
 
-        function saveState() {
-            localStorage.setItem('sxc_live_res_v7', JSON.stringify(resources));
-            localStorage.setItem('sxc_pend_res_v7', JSON.stringify(pendingResources));
-            localStorage.setItem('sxc_suggestions_v7', JSON.stringify(suggestions));
+        async function saveDataLocallyOrCloud() {
+            if (!window.useCloudDB) {
+                localStorage.setItem('sxc_live_res_v8', JSON.stringify(resources));
+                localStorage.setItem('sxc_pend_res_v8', JSON.stringify(pendingResources));
+                localStorage.setItem('sxc_suggestions_v8', JSON.stringify(suggestions));
+            }
         }
 
         // Google Classroom Login Simulation
@@ -585,20 +800,17 @@
             let flags = [];
             const cleanTitle = newTitle.trim().toLowerCase();
             
-            // 1. Gibberish / Keyboard Smash Check
             const gibberishRegex = /(asdf|qwert|zxcvb|test123|1111|aaaa|asdfgh)/i;
             if (cleanTitle.length < 5 || gibberishRegex.test(cleanTitle)) {
                 flags.push("Spam Flag: Suspected keyboard smash or test title.");
             }
 
-            // 2. Exact URL Repetition Check (against live and pending)
-            const duplicateUrl = [...resources, ...pendingResources].some(r => r.fileUrl.trim() === newUrl.trim());
+            const duplicateUrl = [...resources, ...pendingResources].some(r => r.fileUrl && r.fileUrl.trim() === newUrl.trim());
             if (duplicateUrl) {
                 flags.push("Duplicate Flag: This PDF URL has already been submitted or published.");
             }
 
-            // 3. Title Exact Repetition Check
-            const duplicateTitle = [...resources, ...pendingResources].some(r => r.title.trim().toLowerCase() === cleanTitle);
+            const duplicateTitle = [...resources, ...pendingResources].some(r => r.title && r.title.trim().toLowerCase() === cleanTitle);
             if (duplicateTitle) {
                 flags.push("Repetition Flag: A document with this exact title already exists.");
             }
@@ -606,17 +818,15 @@
             return flags;
         }
 
-        function handleStudentUploadSubmit(e) {
+        async function handleStudentUploadSubmit(e) {
             e.preventDefault();
             const title = document.getElementById('studUpTitle').value.trim();
             const fileUrl = document.getElementById('studUpUrl').value.trim();
 
-            // Run Anti-Spam / Repetition Detection
             const spamFlags = analyzeSubmission(title, fileUrl);
             const status = spamFlags.length > 0 ? "Flagged (Needs Admin Review)" : "Passed (Clean Auto-Check)";
 
             const newRes = {
-                id: 'res-' + Date.now(),
                 title: title,
                 department: document.getElementById('studUpDept').value,
                 semester: document.getElementById('studUpSem').value,
@@ -629,8 +839,21 @@
                 date: new Date().toISOString().split('T')[0]
             };
 
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    const { collection, addDoc } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+                    const docRef = await addDoc(collection(window.sxcDB, "pending_resources"), newRes);
+                    newRes.id = docRef.id;
+                } catch (err) {
+                    console.error("Firestore add error:", err);
+                    newRes.id = 'res-' + Date.now();
+                }
+            } else {
+                newRes.id = 'res-' + Date.now();
+            }
+
             pendingResources.unshift(newRes);
-            saveState();
+            await saveDataLocallyOrCloud();
             document.getElementById('studentUploadForm').reset();
             
             if (spamFlags.length > 0) {
@@ -647,20 +870,33 @@
             document.getElementById('ratingText').innerText = `(${stars}/5)`;
         }
 
-        function handleSuggestionSubmit(e) {
+        async function handleSuggestionSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('sugName').value.trim() || (currentUser ? currentUser.name : "Anonymous Xavierite");
             const text = document.getElementById('sugText').value.trim();
 
-            suggestions.unshift({
-                id: 'sug-' + Date.now(),
+            const newSug = {
                 name: name,
                 rating: currentRating,
                 text: text,
                 adminReply: "",
                 date: new Date().toISOString().split('T')[0]
-            });
-            saveState();
+            };
+
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    const { collection, addDoc } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+                    const docRef = await addDoc(collection(window.sxcDB, "suggestions"), newSug);
+                    newSug.id = docRef.id;
+                } catch(e) {
+                    newSug.id = 'sug-' + Date.now();
+                }
+            } else {
+                newSug.id = 'sug-' + Date.now();
+            }
+
+            suggestions.unshift(newSug);
+            await saveDataLocallyOrCloud();
             document.getElementById('sugText').value = '';
             document.getElementById('sugName').value = '';
             renderSuggestions();
@@ -678,7 +914,7 @@
                     <div class="flex justify-between items-center mb-1">
                         <span class="font-bold text-xs text-sxc-navy dark:text-amber-300">${escapeHtml(s.name)}</span>
                         <div class="flex text-amber-400 text-xs">
-                            ${Array(s.rating).fill('<i class="fa-solid fa-star"></i>').join('')}
+                            ${Array(s.rating || 5).fill('<i class="fa-solid fa-star"></i>').join('')}
                         </div>
                     </div>
                     <p class="text-xs text-slate-700 dark:text-slate-300">${escapeHtml(s.text)}</p>
@@ -709,7 +945,6 @@
         }
 
         function renderAdminTables() {
-            // Pending Table
             const pendTbody = document.getElementById('pendingTableList');
             document.getElementById('pendingQueueCount').innerText = `${pendingResources.length} Pending`;
             const badge = document.getElementById('pendingCountBadge');
@@ -731,20 +966,19 @@
                         </td>
                         <td class="p-3 text-xs">${res.type} • ${res.semester}</td>
                         <td class="p-3 text-xs">
-                            <span class="px-2 py-0.5 rounded font-bold ${res.flags.length > 0 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
-                                ${res.status}
+                            <span class="px-2 py-0.5 rounded font-bold ${res.flags && res.flags.length > 0 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
+                                ${res.status || 'Passed'}
                             </span>
-                            ${res.flags.length > 0 ? `<div class="text-[10px] text-red-500 mt-0.5">${res.flags[0]}</div>` : ''}
+                            ${res.flags && res.flags.length > 0 ? `<div class="text-[10px] text-red-500 mt-0.5">${res.flags[0]}</div>` : ''}
                         </td>
                         <td class="p-3 text-right space-x-1">
-                            <button onclick="approvePending(${index})" class="px-2.5 py-1 bg-green-600 hover:bg-green-700 text-white rounded text-xs font-bold cursor-pointer">Approve</button>
-                            <button onclick="rejectPending(${index})" class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white rounded text-xs font-bold cursor-pointer">Delete</button>
+                            <button onclick="approvePending('${res.id}', ${index})" class="px-2.5 py-1 bg-green-600 hover:bg-green-700 text-white rounded text-xs font-bold cursor-pointer">Approve</button>
+                            <button onclick="rejectPending('${res.id}', ${index})" class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white rounded text-xs font-bold cursor-pointer">Delete</button>
                         </td>
                     </tr>
                 `).join('');
             }
 
-            // Admin Suggestions Response Table
             const adminSugContainer = document.getElementById('adminSuggestionsList');
             if (suggestions.length === 0) {
                 adminSugContainer.innerHTML = `<p class="text-xs text-slate-400">No suggestions to respond to.</p>`;
@@ -764,7 +998,6 @@
                 `).join('');
             }
 
-            // Live Database Table
             const liveTbody = document.getElementById('adminDataList');
             document.getElementById('adminTotalCount').innerText = `${resources.length} Live Items`;
             liveTbody.innerHTML = resources.map(res => `
@@ -778,37 +1011,66 @@
             `).join('');
         }
 
-        function saveAdminReply(sugId) {
+        async function saveAdminReply(sugId) {
             const inputVal = document.getElementById(`replyInput-${sugId}`).value.trim();
             const sug = suggestions.find(s => s.id === sugId);
             if (sug) {
                 sug.adminReply = inputVal;
-                saveState();
+                if (window.useCloudDB && window.sxcDB) {
+                    try {
+                        const { doc, updateDoc } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+                        await updateDoc(doc(window.sxcDB, "suggestions", sugId), { adminReply: inputVal });
+                    } catch(e) {}
+                }
+                await saveDataLocallyOrCloud();
                 renderAdminTables();
                 renderSuggestions();
                 showToast("Admin response saved successfully!");
             }
         }
 
-        function approvePending(index) {
+        async function approvePending(id, index) {
             const item = pendingResources.splice(index, 1)[0];
+            delete item.flags;
+            delete item.status;
             resources.unshift(item);
-            saveState();
+
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    const { collection, addDoc, deleteDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+                    await addDoc(collection(window.sxcDB, "resources"), item);
+                    await deleteDoc(doc(window.sxcDB, "pending_resources", id));
+                } catch(e) {}
+            }
+
+            await saveDataLocallyOrCloud();
             renderAdminTables();
             renderResources();
             showToast("Submission approved and published live!");
         }
 
-        function rejectPending(index) {
+        async function rejectPending(id, index) {
             pendingResources.splice(index, 1);
-            saveState();
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    const { deleteDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+                    await deleteDoc(doc(window.sxcDB, "pending_resources", id));
+                } catch(e) {}
+            }
+            await saveDataLocallyOrCloud();
             renderAdminTables();
             showToast("Submission deleted from review queue.");
         }
 
-        function deleteLiveResource(id) {
+        async function deleteLiveResource(id) {
             resources = resources.filter(r => r.id !== id);
-            saveState();
+            if (window.useCloudDB && window.sxcDB) {
+                try {
+                    const { deleteDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+                    await deleteDoc(doc(window.sxcDB, "resources", id));
+                } catch(e) {}
+            }
+            await saveDataLocallyOrCloud();
             renderAdminTables();
             renderResources();
             showToast("Resource deleted from live portal.");
@@ -821,7 +1083,7 @@
             const typeVal = document.getElementById('typeFilter').value;
 
             const filtered = resources.filter(res => {
-                const matchSearch = searchVal === '' || res.title.toLowerCase().includes(searchVal) || res.subject.toLowerCase().includes(searchVal);
+                const matchSearch = searchVal === '' || (res.title && res.title.toLowerCase().includes(searchVal)) || (res.subject && res.subject.toLowerCase().includes(searchVal));
                 const matchDept = deptVal === 'ALL' || res.department === deptVal;
                 const matchSem = semVal === 'ALL' || res.semester === semVal;
                 const matchType = typeVal === 'ALL' || res.type === typeVal;
@@ -887,15 +1149,4 @@
         }
     </script>
 </body>
-</html> 
-
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyClgtxGYcHTrpSGygUWhUhpHEqPUbU_Wos",
-  authDomain: "sxc-portal.firebaseapp.com",
-  projectId: "sxc-portal",
-  storageBucket: "sxc-portal.firebasestorage.app",
-  messagingSenderId: "140939500137",
-  appId: "1:140939500137:web:3ca493698a2359b69ea0f8",
-  measurementId: "G-08WC99F9GQ"
-};
+</html>
